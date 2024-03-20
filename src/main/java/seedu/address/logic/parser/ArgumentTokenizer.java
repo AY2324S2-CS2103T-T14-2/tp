@@ -47,6 +47,16 @@ public class ArgumentTokenizer {
     private static List<PrefixPosition> findPrefixPositions(String argsString, Prefix prefix) {
         List<PrefixPosition> positions = new ArrayList<>();
 
+        // Handle case for Flag
+        if (prefix instanceof Flag) {
+            Flag flag = (Flag) prefix;
+            int flagPosition = findFlagPosition(argsString, flag.toString());
+            PrefixPosition extendedFlag = new PrefixPosition(flag, flagPosition);
+            positions.add(extendedFlag);
+            return positions;
+        }
+
+
         int prefixPosition = findPrefixPosition(argsString, prefix.getPrefix(), 0);
         while (prefixPosition != -1) {
             PrefixPosition extendedPrefix = new PrefixPosition(prefix, prefixPosition);
@@ -73,6 +83,15 @@ public class ArgumentTokenizer {
         int prefixIndex = argsString.indexOf(" " + prefix, fromIndex);
         return prefixIndex == -1 ? -1
                 : prefixIndex + 1; // +1 as offset for whitespace
+    }
+
+    /**
+     * Returns the index of the first occurrence of {@code Flag} in
+     * {@code argsString} starting from index {@code fromIndex}. Returns -1 if no
+     * such occurrence can be found.
+     */
+    private static int findFlagPosition(String argString, String flag) {
+        return argString.indexOf(flag);
     }
 
     /**
@@ -112,11 +131,16 @@ public class ArgumentTokenizer {
     /**
      * Returns the trimmed value of the argument in the arguments string specified by {@code currentPrefixPosition}.
      * The end position of the value is determined by {@code nextPrefixPosition}.
+     * If current prefix is a flag, return empty string.
      */
     private static String extractArgumentValue(String argsString,
                                         PrefixPosition currentPrefixPosition,
                                         PrefixPosition nextPrefixPosition) {
         Prefix prefix = currentPrefixPosition.getPrefix();
+
+        if (prefix instanceof Flag) {
+            return "";
+        }
 
         int valueStartPos = currentPrefixPosition.getStartPosition() + prefix.getPrefix().length();
         String value = argsString.substring(valueStartPos, nextPrefixPosition.getStartPosition());

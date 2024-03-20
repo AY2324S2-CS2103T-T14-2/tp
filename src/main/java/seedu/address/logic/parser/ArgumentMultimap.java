@@ -36,6 +36,13 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns true if {@code flag} exists.
+     */
+    public boolean hasFlag(Flag flag) {
+        return argMultimap.containsKey(flag);
+    }
+
+    /**
      * Returns the last value of {@code prefix}.
      */
     public Optional<String> getValue(Prefix prefix) {
