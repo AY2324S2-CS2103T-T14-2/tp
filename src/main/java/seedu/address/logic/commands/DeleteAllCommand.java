@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 /**
- * Deletes all entries in the address book.
+ * Deletes all entries in the list.
  */
 public class DeleteAllCommand extends Command {
 

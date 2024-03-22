@@ -32,7 +32,7 @@ import seedu.address.testutil.PatientUtil;
 
 public class AddressBookParserTest {
 
-    private final AddressBookParser parser = new AddressBookParser();
+    private final InputParser parser = new InputParser();
 
     @Test
     public void parseCommand_add() throws Exception {
