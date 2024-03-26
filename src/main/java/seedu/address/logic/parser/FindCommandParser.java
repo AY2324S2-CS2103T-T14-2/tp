@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import java.util.Arrays;
 import java.util.function.Predicate;
@@ -56,13 +56,13 @@ public class FindCommandParser implements Parser<FindCommand> {
             String [] nameKeywords = keyword.split("\\s+");
             namePredicate = new NameContainsKeywordsPredicate(Arrays.asList(nameKeywords));
         } else {
-            namePredicate = PREDICATE_SHOW_ALL_PERSONS;
+            namePredicate = PREDICATE_SHOW_ALL_PATIENTS;
         }
 
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
             phonePredicate = new PhoneMatchesPredicate(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         } else {
-            phonePredicate = PREDICATE_SHOW_ALL_PERSONS;
+            phonePredicate = PREDICATE_SHOW_ALL_PATIENTS;
         }
 
         logger.info("----------------[namePredicate][" + namePredicate + "]");

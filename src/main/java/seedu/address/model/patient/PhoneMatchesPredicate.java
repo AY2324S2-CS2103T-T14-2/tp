@@ -5,7 +5,7 @@ import java.util.function.Predicate;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Tests that a {@code Person}'s {@code Phone} matches the number given.
+ * Tests that a {@code Patient}'s {@code Phone} matches the number given.
  */
 public class PhoneMatchesPredicate implements Predicate<Patient> {
     private final Phone phone;

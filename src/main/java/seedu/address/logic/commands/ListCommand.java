@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -23,18 +23,18 @@ public class ListCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        model.updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
         List<Patient> sortedList = new ArrayList<Patient>();
-        sortedList.addAll(model.getFilteredPersonList());
+        sortedList.addAll(model.getFilteredPatientList());
         Comparator<Patient> comparator = (patient1, patient2) -> {
             return patient1.getName().fullName.compareTo(patient2.getName().fullName);
         };
         sortedList.sort(comparator);
-        for ( Patient patient : sortedList ) {
-            model.deletePerson(patient);
+        for (Patient patient : sortedList) {
+            model.deletePatient(patient);
         }
-        for ( Patient patient : sortedList ) {
-            model.addPerson(patient);
+        for (Patient patient : sortedList) {
+            model.addPatient(patient);
         }
         return new CommandResult(MESSAGE_SUCCESS);
     }

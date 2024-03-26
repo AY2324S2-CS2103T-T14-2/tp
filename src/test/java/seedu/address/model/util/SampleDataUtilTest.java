@@ -10,7 +10,7 @@ public class SampleDataUtilTest {
 
     @Test
     public void getSamplePersons_returnsNonEmptyArray() {
-        Patient[] patients = SampleDataUtil.getSamplePersons();
+        Patient[] patients = SampleDataUtil.getSamplePatients();
         assertTrue(patients.length != 0);
     }
 }

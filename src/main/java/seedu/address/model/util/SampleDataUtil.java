@@ -1,7 +1,7 @@
 package seedu.address.model.util;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.PatientList;
+import seedu.address.model.ReadOnlyPatientList;
 import seedu.address.model.patient.Address;
 import seedu.address.model.patient.DateOfBirth;
 import seedu.address.model.patient.Email;
@@ -11,10 +11,10 @@ import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code PatientList} with sample data.
  */
 public class SampleDataUtil {
-    public static Patient[] getSamplePersons() {
+    public static Patient[] getSamplePatients() {
         return new Patient[] {
             new Patient(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Address("Blk 30 Geylang Street 29, #06-40"),
@@ -37,11 +37,11 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
-        for (Patient samplePatient : getSamplePersons()) {
-            sampleAb.addPerson(samplePatient);
+    public static ReadOnlyPatientList getSamplePatientList() {
+        PatientList sampleList = new PatientList();
+        for (Patient samplePatient : getSamplePatients()) {
+            sampleList.addPatient(samplePatient);
         }
-        return sampleAb;
+        return sampleList;
     }
 }

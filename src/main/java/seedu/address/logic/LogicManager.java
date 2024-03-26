@@ -14,7 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.InputParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyPatientList;
 import seedu.address.model.patient.Patient;
 import seedu.address.storage.Storage;
 
@@ -51,7 +51,7 @@ public class LogicManager implements Logic {
         commandResult = command.execute(model);
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            storage.savePatientList(model.getPatientList());
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
@@ -62,18 +62,18 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyAddressBook getPatientList() {
-        return model.getAddressBook();
+    public ReadOnlyPatientList getPatientList() {
+        return model.getPatientList();
     }
 
     @Override
     public ObservableList<Patient> getFilteredPatientList() {
-        return model.getFilteredPersonList();
+        return model.getFilteredPatientList();
     }
 
     @Override
     public Path getPatientListFilePath() {
-        return model.getAddressBookFilePath();
+        return model.getPatientListFilePath();
     }
 
     @Override

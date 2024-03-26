@@ -21,25 +21,25 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.exceptions.DuplicatePatientException;
 import seedu.address.testutil.PatientBuilder;
 
-public class AddressBookTest {
+public class PatientListTest {
 
-    private final AddressBook addressBook = new AddressBook();
+    private final PatientList patientList = new PatientList();
 
     @Test
     public void constructor() {
-        assertEquals(Collections.emptyList(), addressBook.getPersonList());
+        assertEquals(Collections.emptyList(), patientList.getPatientList());
     }
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.resetData(null));
+        assertThrows(NullPointerException.class, () -> patientList.resetData(null));
     }
 
     @Test
     public void resetData_withValidReadOnlyAddressBook_replacesData() {
-        AddressBook newData = getTypicalAddressBook();
-        addressBook.resetData(newData);
-        assertEquals(newData, addressBook);
+        PatientList newData = getTypicalAddressBook();
+        patientList.resetData(newData);
+        assertEquals(newData, patientList);
     }
 
     @Test
@@ -50,48 +50,48 @@ public class AddressBookTest {
         List<Patient> newPatients = Arrays.asList(ALICE, editedAlice);
         AddressBookStub newData = new AddressBookStub(newPatients);
 
-        assertThrows(DuplicatePatientException.class, () -> addressBook.resetData(newData));
+        assertThrows(DuplicatePatientException.class, () -> patientList.resetData(newData));
     }
 
     @Test
     public void hasPerson_nullPerson_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> addressBook.hasPerson(null));
+        assertThrows(NullPointerException.class, () -> patientList.hasPatient(null));
     }
 
     @Test
     public void hasPerson_personNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasPerson(ALICE));
+        assertFalse(patientList.hasPatient(ALICE));
     }
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
-        assertTrue(addressBook.hasPerson(ALICE));
+        patientList.addPatient(ALICE);
+        assertTrue(patientList.hasPatient(ALICE));
     }
 
     @Test
     public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addPerson(ALICE);
+        patientList.addPatient(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
-        assertTrue(addressBook.hasPerson(editedAlice));
+        assertTrue(patientList.hasPatient(editedAlice));
     }
 
     @Test
     public void getPersonList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> addressBook.getPersonList().remove(0));
+        assertThrows(UnsupportedOperationException.class, () -> patientList.getPatientList().remove(0));
     }
 
     @Test
     public void toStringMethod() {
-        String expected = AddressBook.class.getCanonicalName() + "{patients=" + addressBook.getPersonList() + "}";
-        assertEquals(expected, addressBook.toString());
+        String expected = PatientList.class.getCanonicalName() + "{patients=" + patientList.getPatientList() + "}";
+        assertEquals(expected, patientList.toString());
     }
 
     /**
-     * A stub ReadOnlyAddressBook whose patients list can violate interface constraints.
+     * A stub ReadOnlyPatientList whose patients list can violate interface constraints.
      */
-    private static class AddressBookStub implements ReadOnlyAddressBook {
+    private static class AddressBookStub implements ReadOnlyPatientList {
         private final ObservableList<Patient> patients = FXCollections.observableArrayList();
 
         AddressBookStub(Collection<Patient> patients) {
@@ -99,7 +99,7 @@ public class AddressBookTest {
         }
 
         @Override
-        public ObservableList<Patient> getPersonList() {
+        public ObservableList<Patient> getPatientList() {
             return patients;
         }
     }

@@ -14,30 +14,30 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.patient.Patient;
 
 /**
- * Represents the in-memory model of the address book data.
+ * Represents the in-memory model of the patient list data.
  */
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private final PatientList patientList;
     private final UserPrefs userPrefs;
     private final FilteredList<Patient> filteredPatients;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given patientList and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyUserPrefs userPrefs) {
-        requireAllNonNull(addressBook, userPrefs);
+    public ModelManager(ReadOnlyPatientList patientList, ReadOnlyUserPrefs userPrefs) {
+        requireAllNonNull(patientList, userPrefs);
 
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+        logger.fine("Initializing with patient list: " + patientList + " and user prefs " + userPrefs);
 
-        this.addressBook = new AddressBook(addressBook);
+        this.patientList = new PatientList(patientList);
         this.userPrefs = new UserPrefs(userPrefs);
-        filteredPatients = new FilteredList<>(this.addressBook.getPersonList());
+        filteredPatients = new FilteredList<>(this.patientList.getPatientList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new PatientList(), new UserPrefs());
     }
 
     //=========== UserPrefs ==================================================================================
@@ -65,65 +65,64 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
-        return userPrefs.getAddressBookFilePath();
+    public Path getPatientListFilePath() {
+        return userPrefs.getPatientListFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setPatientListFilePath(Path patientListFilePath) {
+        requireNonNull(patientListFilePath);
+        userPrefs.setPatientListFilePath(patientListFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    //=========== PatientList ================================================================================
 
     @Override
-    public void setAddressBook(ReadOnlyAddressBook addressBook) {
-        this.addressBook.resetData(addressBook);
-    }
-
-    @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
+    public void setPatientList(ReadOnlyPatientList patientList) {
+        this.patientList.resetData(patientList);
     }
 
     @Override
-    public boolean hasPerson(Patient patient) {
+    public ReadOnlyPatientList getPatientList() {
+        return patientList;
+    }
+
+    @Override
+    public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
-        return addressBook.hasPerson(patient);
+        return patientList.hasPatient(patient);
     }
 
     @Override
-    public void deletePerson(Patient target) {
-        addressBook.removePerson(target);
+    public void deletePatient(Patient target) {
+        patientList.removePatient(target);
     }
 
     @Override
-    public void addPerson(Patient patient) {
-        addressBook.addPerson(patient);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    public void addPatient(Patient patient) {
+        patientList.addPatient(patient);
+        updateFilteredPatientList(PREDICATE_SHOW_ALL_PATIENTS);
     }
 
     @Override
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireAllNonNull(target, editedPatient);
 
-        addressBook.setPerson(target, editedPatient);
+        patientList.setPatient(target, editedPatient);
     }
 
     //=========== Filtered Patient List Accessors =============================================================
 
     /**
-     * Returns an unmodifiable view of the list of {@code Patient} backed by the internal list of
-     * {@code versionedAddressBook}
+     * Returns an unmodifiable view of the filtered list of {@code Patient}.
      */
     @Override
-    public ObservableList<Patient> getFilteredPersonList() {
+    public ObservableList<Patient> getFilteredPatientList() {
         return filteredPatients;
     }
 
     @Override
-    public void updateFilteredPersonList(Predicate<Patient> predicate) {
+    public void updateFilteredPatientList(Predicate<Patient> predicate) {
         requireNonNull(predicate);
         filteredPatients.setPredicate(predicate);
     }
@@ -140,7 +139,7 @@ public class ModelManager implements Model {
         }
 
         ModelManager otherModelManager = (ModelManager) other;
-        return addressBook.equals(otherModelManager.addressBook)
+        return patientList.equals(otherModelManager.patientList)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPatients.equals(otherModelManager.filteredPatients);
     }
