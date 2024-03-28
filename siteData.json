@@ -51,6 +51,7 @@
         "common-classes": "Common classes",
         "implementation": "Implementation",
         "find-feature": "Find feature",
+        "list-in-alphabetical-order-feature": "List in alphabetical order feature",
         "delete-all-feature": "Delete All feature",
         "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
         "proposed-data-archiving": "[Proposed] Data archiving",
