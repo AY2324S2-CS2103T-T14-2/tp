@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.patient.Patient;
 
 /**
- * Adds a patient to the list.
+ * Adds a patient to the patient list.
  */
 public class AddCommand extends Command {
 

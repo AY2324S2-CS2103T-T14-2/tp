@@ -6,7 +6,7 @@ import seedu.address.model.Model;
 import seedu.address.model.PatientList;
 
 /**
- * Deletes all patients in the list forcefully.
+ * Deletes all patients in the patient list forcefully.
  */
 public class ForceDeleteAllCommand extends Command {
     public static final String COMMAND_WORD = "delete-all-f";

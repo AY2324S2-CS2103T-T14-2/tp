@@ -79,7 +79,7 @@ public class LogsCenter {
      * Sets it as the {@code baseLogger}, to be used as the parent logger of all other loggers.
      */
     private static void setBaseLogger() {
-        baseLogger = Logger.getLogger("base");
+        baseLogger = Logger.getLogger("meditrack");
         baseLogger.setUseParentHandlers(false);
         removeHandlers(baseLogger);
 

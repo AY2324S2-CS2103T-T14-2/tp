@@ -28,7 +28,7 @@ import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
 
 /**
- * Edits the details of an existing patient in the list.
+ * Edits the details of an existing patient in the patient list.
  */
 public class EditCommand extends Command {
 
