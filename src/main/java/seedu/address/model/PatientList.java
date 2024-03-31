@@ -10,10 +10,10 @@ import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.UniquePatientList;
 
 /**
- * Wraps all data at the address-book level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the patient list level
+ * Duplicates are not allowed (by .isSamePatient comparison)
  */
-public class AddressBook implements ReadOnlyAddressBook {
+public class PatientList implements ReadOnlyPatientList {
 
     private final UniquePatientList patients;
 
@@ -28,12 +28,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         patients = new UniquePatientList();
     }
 
-    public AddressBook() {}
+    public PatientList() {}
 
     /**
-     * Creates an AddressBook using the Persons in the {@code toBeCopied}
+     * Creates a PatientList using the Patients in the {@code toBeCopied}
      */
-    public AddressBook(ReadOnlyAddressBook toBeCopied) {
+    public PatientList(ReadOnlyPatientList toBeCopied) {
         this();
         resetData(toBeCopied);
     }
@@ -49,49 +49,49 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code PatientList} with {@code newData}.
      */
-    public void resetData(ReadOnlyAddressBook newData) {
+    public void resetData(ReadOnlyPatientList newData) {
         requireNonNull(newData);
 
-        setPatients(newData.getPersonList());
+        setPatients(newData.getPatientList());
     }
 
     //// patient-level operations
 
     /**
-     * Returns true if a patient with the same identity as {@code patient} exists in the address book.
+     * Returns true if a patient with the same identity as {@code patient} exists in the list.
      */
-    public boolean hasPerson(Patient patient) {
+    public boolean hasPatient(Patient patient) {
         requireNonNull(patient);
         return patients.contains(patient);
     }
 
     /**
-     * Adds a patient to the address book.
-     * The patient must not already exist in the address book.
+     * Adds a patient to the list.
+     * The patient must not already exist in the list.
      */
-    public void addPerson(Patient p) {
+    public void addPatient(Patient p) {
         patients.add(p);
     }
 
     /**
      * Replaces the given patient {@code target} in the list with {@code editedPatient}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the list.
      * The patient identity of {@code editedPatient} must not be the same as another existing patient
-     * in the address book.
+     * in the list.
      */
-    public void setPerson(Patient target, Patient editedPatient) {
+    public void setPatient(Patient target, Patient editedPatient) {
         requireNonNull(editedPatient);
 
         patients.setPatient(target, editedPatient);
     }
 
     /**
-     * Removes {@code key} from this {@code AddressBook}.
-     * {@code key} must exist in the address book.
+     * Removes {@code key} from this {@code PatientList}.
+     * {@code key} must exist in the list.
      */
-    public void removePerson(Patient key) {
+    public void removePatient(Patient key) {
         patients.remove(key);
     }
 
@@ -105,7 +105,7 @@ public class AddressBook implements ReadOnlyAddressBook {
     }
 
     @Override
-    public ObservableList<Patient> getPersonList() {
+    public ObservableList<Patient> getPatientList() {
         return patients.asUnmodifiableObservableList();
     }
 
@@ -116,12 +116,12 @@ public class AddressBook implements ReadOnlyAddressBook {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressBook)) {
+        if (!(other instanceof PatientList)) {
             return false;
         }
 
-        AddressBook otherAddressBook = (AddressBook) other;
-        return patients.equals(otherAddressBook.patients);
+        PatientList otherPatientList = (PatientList) other;
+        return patients.equals(otherPatientList.patients);
     }
 
     @Override

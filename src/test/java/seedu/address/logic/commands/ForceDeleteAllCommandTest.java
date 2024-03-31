@@ -5,9 +5,9 @@ import static seedu.address.testutil.TypicalPatients.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.PatientList;
 import seedu.address.model.UserPrefs;
 
 /**
@@ -15,7 +15,7 @@ import seedu.address.model.UserPrefs;
  */
 public class ForceDeleteAllCommandTest {
     /**
-     * Tests when AddressBook is empty.
+     * Tests when PatientList is empty.
      */
     @Test
     public void execute_emptyAddressBook_success() {
@@ -26,13 +26,13 @@ public class ForceDeleteAllCommandTest {
     }
 
     /**
-     * Tests when AddressBook is not empty.
+     * Tests when PatientList is not empty.
      */
     @Test
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel.setAddressBook(new AddressBook());
+        expectedModel.setPatientList(new PatientList());
 
         assertCommandSuccess(new ForceDeleteAllCommand(), model, ForceDeleteAllCommand.MESSAGE_SUCCESS, expectedModel);
     }

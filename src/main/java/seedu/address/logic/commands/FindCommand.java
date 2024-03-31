@@ -13,7 +13,7 @@ import seedu.address.model.patient.Patient;
 
 
 /**
- * Finds and lists all persons whose name or phone number matches any of the argument inputs.
+ * Finds and lists all patients whose name or phone number matches any of the argument inputs.
  * Name matching is case insensitive.
  */
 public class FindCommand extends Command {
@@ -21,7 +21,7 @@ public class FindCommand extends Command {
     public static final String COMMAND_WORD = "find";
 
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names or phone numbers "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all patients whose names or phone numbers "
             + "matches any of the inputs (case-insensitive for names) and displays them as a list with index numbers.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "KEYWORD] "
@@ -47,9 +47,9 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(namePredicate.and(phonePredicate));
+        model.updateFilteredPatientList(namePredicate.and(phonePredicate));
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW, model.getFilteredPatientList().size()));
     }
 
     @Override
