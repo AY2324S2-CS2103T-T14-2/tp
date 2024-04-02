@@ -3,8 +3,9 @@ package seedu.address.model.patient;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.logic.parser.DateTimeParser;
 import java.time.LocalDate;
+
+import seedu.address.logic.parser.DateTimeParser;
 /**
  * Represents a Patient's date of birth.
  * Guarantees: immutable; is valid as declared in {@link #isValidDateOfBirth(String)}

@@ -64,7 +64,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPatientDescriptor.setSex(ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get()));
         }
         if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
-            editPatientDescriptor.setAppointment(ParserUtil.parseAppointment(argMultimap.getValue(PREFIX_APPOINTMENT).get()));
+            editPatientDescriptor.setAppointment(ParserUtil.parseAppointment(argMultimap
+                    .getValue(PREFIX_APPOINTMENT).get()));
         }
 
         if (!editPatientDescriptor.isAnyFieldEdited()) {

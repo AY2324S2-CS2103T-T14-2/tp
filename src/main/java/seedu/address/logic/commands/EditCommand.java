@@ -106,7 +106,8 @@ public class EditCommand extends Command {
         Sex updatedSex = editPatientDescriptor.getSex().orElse(patientToEdit.getSex());
         Appointment updatedAppointment = editPatientDescriptor.getAppointment().orElse(patientToEdit.getAppointment());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDateOfBirth, updatedSex, updatedAppointment);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDateOfBirth, updatedSex,
+                updatedAppointment);
     }
 
     @Override

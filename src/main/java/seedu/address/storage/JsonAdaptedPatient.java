@@ -119,7 +119,8 @@ class JsonAdaptedPatient {
         }
         final Appointment modelAppointment = new Appointment(appointment);
 
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelDateOfBirth, modelSex, modelAppointment);
+        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelDateOfBirth, modelSex,
+                modelAppointment);
     }
 
 }

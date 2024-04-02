@@ -3,8 +3,9 @@ package seedu.address.model.patient;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.logic.parser.DateTimeParser;
 import java.time.LocalDate;
+
+import seedu.address.logic.parser.DateTimeParser;
 
 /**
  * Represents a Patient's next appointment date
@@ -38,7 +39,7 @@ public class Appointment {
     public static boolean isValidAppointment(String test) {
         if (test.isEmpty()) {
             return true;
-        } else if (!test.isEmpty()){
+        } else if (!test.isEmpty()) {
             return DateTimeParser.parseDateTime(test) == null ? false : true;
         } else {
             return false;
