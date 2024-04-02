@@ -6,48 +6,55 @@
     "email" : "alice@example.com",
     "address" : "123, Jurong West Ave 6, #08-111",
     "dateOfBirth" : "2024-2-25",
-    "sex" : "Female"
+    "sex" : "Female",
+    "appointment": "2025-2-25"
   }, {
     "name" : "Benson Meier",
     "phone" : "98765432",
     "email" : "johnd@example.com",
     "address" : "311, Clementi Ave 2, #02-25",
-    "dateOfBirth" : "2024-02-25",
-    "sex" : "Male"
+    "dateOfBirth" : "2024-2-25",
+    "sex" : "Male",
+    "appointment": ""
   }, {
     "name" : "Carl Kurz",
     "phone" : "95352563",
     "email" : "heinz@example.com",
     "address" : "wall street",
     "dateOfBirth" : "2032-06-23",
-    "sex" : "Male"
+    "sex" : "Male",
+    "appointment": "2026-12-2"
   }, {
     "name" : "Daniel Meier",
     "phone" : "87652533",
     "email" : "cornelia@example.com",
     "address" : "10th street",
     "dateOfBirth" : "2028-11-28",
-    "sex" : "Male"
+    "sex" : "Male",
+    "appointment": ""
   }, {
     "name" : "Elle Meyer",
     "phone" : "9482224",
     "email" : "werner@example.com",
     "address" : "michegan ave",
     "dateOfBirth" : "2024-01-01",
-    "sex" : "Male"
+    "sex" : "Male",
+    "appointment": ""
   }, {
     "name" : "Fiona Kunz",
     "phone" : "9482427",
     "email" : "lydia@example.com",
     "address" : "little tokyo",
     "dateOfBirth" : "2024-06-25",
-    "sex" : "Female"
+    "sex" : "Female",
+    "appointment": "2192-5-12"
   }, {
     "name" : "George Best",
     "phone" : "9482442",
     "email" : "anna@example.com",
     "address" : "4th street",
     "dateOfBirth" : "2024-02-25",
-    "sex" : "Male"
+    "sex" : "Male",
+    "appointment": ""
   } ]
 }

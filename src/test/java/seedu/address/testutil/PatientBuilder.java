@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Appointment;
 import seedu.address.model.patient.DateOfBirth;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
@@ -19,6 +20,7 @@ public class PatientBuilder {
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_DATEOFBIRTH = "25/2/2025";
     public static final String DEFAULT_SEX = "Female";
+    public static final String DEFAULT_APPOINTMENT = "";
 
     private Name name;
     private Phone phone;
@@ -26,6 +28,7 @@ public class PatientBuilder {
     private Address address;
     private DateOfBirth dateOfBirth;
     private Sex sex;
+    private Appointment appointment;
 
     /**
      * Creates a {@code PatientBuilder} with the default details.
@@ -37,6 +40,7 @@ public class PatientBuilder {
         address = new Address(DEFAULT_ADDRESS);
         dateOfBirth = new DateOfBirth(DEFAULT_DATEOFBIRTH);
         sex = new Sex(DEFAULT_SEX);
+        appointment = new Appointment(DEFAULT_APPOINTMENT);
     }
 
     /**
@@ -49,6 +53,7 @@ public class PatientBuilder {
         address = patientToCopy.getAddress();
         dateOfBirth = patientToCopy.getDateOfBirth();
         sex = patientToCopy.getSex();
+        appointment = patientToCopy.getAppointment();
     }
 
     /**
@@ -99,8 +104,16 @@ public class PatientBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Appointment} of the {@Cose Appointment} that we are building.
+     */
+    public PatientBuilder withAppointment(String appointment) {
+        this.appointment = new Appointment(appointment);
+        return this;
+    }
+
     public Patient build() {
-        return new Patient(name, phone, email, address, dateOfBirth, sex);
+        return new Patient(name, phone, email, address, dateOfBirth, sex, appointment);
     }
 
 }
