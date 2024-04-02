@@ -50,7 +50,8 @@ public class PatientUtil {
         descriptor.getDateOfBirth().ifPresent(dateOfBirth -> sb.append(PREFIX_DATEOFBIRTH)
                 .append(dateOfBirth.dateOfBirth).append(" "));
         descriptor.getSex().ifPresent(sex -> sb.append(PREFIX_SEX).append(sex.sex.getLabel()).append(" "));
-        descriptor.getAppointment().ifPresent(appointment -> sb.append(PREFIX_APPOINTMENT).append(appointment.appointment == null ? "" : appointment.appointment).append(" "));
+        descriptor.getAppointment().ifPresent(appointment -> sb.append(PREFIX_APPOINTMENT)
+                .append(appointment.appointment == null ? "" : appointment.appointment).append(" "));
         return sb.toString();
     }
 }
