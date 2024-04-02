@@ -2,11 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.PatientList;
 
 /**
- * Deletes all persons in the address book forcefully.
+ * Deletes all patients in the patient list forcefully.
  */
 public class ForceDeleteAllCommand extends Command {
     public static final String COMMAND_WORD = "delete-all-f";
@@ -22,7 +22,7 @@ public class ForceDeleteAllCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        model.setAddressBook(new AddressBook());
+        model.setPatientList(new PatientList());
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -12,7 +12,7 @@ import seedu.address.model.patient.Patient;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Patient> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Patient> PREDICATE_SHOW_ALL_PATIENTS = unused -> true;
 
     /**
      * Replaces user prefs data with the data in {@code userPrefs}.
@@ -35,54 +35,54 @@ public interface Model {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' patient list file path.
      */
-    Path getAddressBookFilePath();
+    Path getPatientListFilePath();
 
     /**
-     * Sets the user prefs' address book file path.
+     * Sets the user prefs' patient list file path.
      */
-    void setAddressBookFilePath(Path addressBookFilePath);
+    void setPatientListFilePath(Path patientListFilePath);
 
     /**
-     * Replaces address book data with the data in {@code addressBook}.
+     * Replaces patient list data with the data in {@code patientList]}.
      */
-    void setAddressBook(ReadOnlyAddressBook addressBook);
+    void setPatientList(ReadOnlyPatientList patientList);
 
-    /** Returns the AddressBook */
-    ReadOnlyAddressBook getAddressBook();
+    /** Returns the PatientList */
+    ReadOnlyPatientList getPatientList();
 
     /**
-     * Returns true if a patient with the same identity as {@code patient} exists in the address book.
+     * Returns true if a patient with the same identity as {@code patient} exists in the patient list.
      */
-    boolean hasPerson(Patient patient);
+    boolean hasPatient(Patient patient);
 
     /**
      * Deletes the given patient.
-     * The patient must exist in the address book.
+     * The patient must exist in the patient list.
      */
-    void deletePerson(Patient target);
+    void deletePatient(Patient target);
 
     /**
      * Adds the given patient.
-     * {@code patient} must not already exist in the address book.
+     * {@code patient} must not already exist in the patient list.
      */
-    void addPerson(Patient patient);
+    void addPatient(Patient patient);
 
     /**
      * Replaces the given patient {@code target} with {@code editedPatient}.
-     * {@code target} must exist in the address book.
+     * {@code target} must exist in the patient list.
      * The patient identity of {@code editedPatient} must not be the same as
-     * another existing patient in the address book.
+     * another existing patient in the patient list.
      */
-    void setPerson(Patient target, Patient editedPatient);
+    void setPatient(Patient target, Patient editedPatient);
 
     /** Returns an unmodifiable view of the filtered patient list */
-    ObservableList<Patient> getFilteredPersonList();
+    ObservableList<Patient> getFilteredPatientList();
 
     /**
      * Updates the filter of the filtered patient list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.
      */
-    void updateFilteredPersonList(Predicate<Patient> predicate);
+    void updateFilteredPatientList(Predicate<Patient> predicate);
 }

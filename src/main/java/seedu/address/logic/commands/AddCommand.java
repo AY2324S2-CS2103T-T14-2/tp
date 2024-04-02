@@ -15,13 +15,13 @@ import seedu.address.model.Model;
 import seedu.address.model.patient.Patient;
 
 /**
- * Adds a patient to the address book.
+ * Adds a patient to the patient list.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a patient to the list. "
             + "Parameters: "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
@@ -38,7 +38,7 @@ public class AddCommand extends Command {
             + PREFIX_SEX + "Male";
 
     public static final String MESSAGE_SUCCESS = "New patient added: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This patient already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the list";
 
     private final Patient toAdd;
 
@@ -54,11 +54,11 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasPatient(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_PATIENT);
         }
 
-        model.addPerson(toAdd);
+        model.addPatient(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

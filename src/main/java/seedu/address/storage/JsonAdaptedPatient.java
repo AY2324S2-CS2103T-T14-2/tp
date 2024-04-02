@@ -15,7 +15,7 @@ import seedu.address.model.patient.Sex;
 /**
  * Jackson-friendly version of {@link Patient}.
  */
-class JsonAdaptedPerson {
+class JsonAdaptedPatient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
 
@@ -28,10 +28,10 @@ class JsonAdaptedPerson {
     private final String appointment;
 
     /**
-     * Constructs a {@code JsonAdaptedPerson} with the given patient details.
+     * Constructs a {@code JsonAdaptedPatient} with the given patient details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
+    public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("date of birth") String dateOfBirth,
                              @JsonProperty("sex") String sex, @JsonProperty("appointment") String appointment) {
@@ -47,7 +47,7 @@ class JsonAdaptedPerson {
     /**
      * Converts a given {@code Patient} into this class for Jackson use.
      */
-    public JsonAdaptedPerson(Patient source) {
+    public JsonAdaptedPatient(Patient source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;

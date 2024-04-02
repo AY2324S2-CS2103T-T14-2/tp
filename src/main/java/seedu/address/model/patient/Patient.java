@@ -7,7 +7,7 @@ import java.util.Objects;
 import seedu.address.commons.util.ToStringBuilder;
 
 /**
- * Represents a Patient in the address book.
+ * Represents a Patient in the list.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class Patient {
@@ -66,8 +66,8 @@ public class Patient {
     }
 
     /**
-     * Returns true if both persons have the same name.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both patients have the same name.
+     * This defines a weaker notion of equality between two patients.
      */
     public boolean isSamePatient(Patient otherPatient) {
         if (otherPatient == this) {
@@ -80,8 +80,8 @@ public class Patient {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both patients have the same identity and data fields.
+     * This defines a stronger notion of equality between two patients.
      */
     @Override
     public boolean equals(Object other) {

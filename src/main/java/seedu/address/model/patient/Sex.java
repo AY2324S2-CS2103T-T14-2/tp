@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
- * Represents a Patient's sex in the patient list.
+ * Represents a Patient's sex in the list.
  * Guarantees: immutable; is valid as declared in {@link #isValidSex(String)}
  */
 public class Sex {
