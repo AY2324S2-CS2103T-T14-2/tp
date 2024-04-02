@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -34,7 +35,6 @@ public class PatientUtil {
         sb.append(PREFIX_ADDRESS + patient.getAddress().value + " ");
         sb.append(PREFIX_DATEOFBIRTH + patient.getDateOfBirth().toString() + " ");
         sb.append(PREFIX_SEX + patient.getSex().toString() + " ");
-        System.out.println(sb.toString());
         return sb.toString();
     }
 
@@ -49,6 +49,8 @@ public class PatientUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getDateOfBirth().ifPresent(dateOfBirth -> sb.append(PREFIX_DATEOFBIRTH)
                 .append(dateOfBirth.dateOfBirth).append(" "));
+        descriptor.getSex().ifPresent(sex -> sb.append(PREFIX_SEX).append(sex.sex.getLabel()).append(" "));
+        descriptor.getAppointment().ifPresent(appointment -> sb.append(PREFIX_APPOINTMENT).append(appointment.appointment == null ? "" : appointment.appointment).append(" "));
         return sb.toString();
     }
 }

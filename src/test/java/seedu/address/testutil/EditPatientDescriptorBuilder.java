@@ -2,6 +2,7 @@ package seedu.address.testutil;
 
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Appointment;
 import seedu.address.model.patient.DateOfBirth;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
@@ -34,6 +35,8 @@ public class EditPatientDescriptorBuilder {
         descriptor.setEmail(patient.getEmail());
         descriptor.setAddress(patient.getAddress());
         descriptor.setDateOfBirth(patient.getDateOfBirth());
+        descriptor.setSex(patient.getSex());
+        descriptor.setAppointment(patient.getAppointment());
     }
 
     /**
@@ -81,6 +84,14 @@ public class EditPatientDescriptorBuilder {
      */
     public EditPatientDescriptorBuilder withSex(String sex) {
         descriptor.setSex(new Sex(sex));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Appointment} of the {@code EditPersonDescriptor} that we are building.
+     */
+    public EditPatientDescriptorBuilder withAppointment(String appointment) {
+        descriptor.setAppointment(new Appointment(appointment));
         return this;
     }
 

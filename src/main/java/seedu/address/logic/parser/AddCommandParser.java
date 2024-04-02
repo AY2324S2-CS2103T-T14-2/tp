@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -13,6 +14,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Appointment;
 import seedu.address.model.patient.DateOfBirth;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
@@ -50,7 +52,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         DateOfBirth dateOfBirth = ParserUtil.parseDateOfBirth(argMultimap.getValue(PREFIX_DATEOFBIRTH).get());
         Sex sex = ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get());
 
-        Patient patient = new Patient(name, phone, email, address, dateOfBirth, sex);
+        Patient patient = new Patient(name, phone, email, address, dateOfBirth, sex, new Appointment(""));
 
         return new AddCommand(patient);
     }

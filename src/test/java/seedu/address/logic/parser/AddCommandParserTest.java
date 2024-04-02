@@ -3,6 +3,8 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.APPOINTMENT_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.DATEOFBIRTH_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DATEOFBIRTH_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.EMAIL_DESC_AMY;
@@ -57,7 +59,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        Patient expectedPatient = new PatientBuilder(BOB).build();
+        Patient expectedPatient = new PatientBuilder(BOB).withAppointment("").build();
 
         // whitespace only preamble
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
@@ -65,7 +67,7 @@ public class AddCommandParserTest {
 
 
         // multiple tags - all accepted
-        Patient expectedPatientMultipleTags = new PatientBuilder(BOB)
+        Patient expectedPatientMultipleTags = new PatientBuilder(BOB).withAppointment("")
                 .build();
         assertParseSuccess(parser,
                 NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB + DATEOFBIRTH_DESC_BOB
@@ -166,6 +168,7 @@ public class AddCommandParserTest {
     public void parse_optionalFieldsMissing_success() {
         // zero tags
         Patient expectedPatient = new PatientBuilder(AMY).build();
+        System.out.println(expectedPatient);
         assertParseSuccess(parser, NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY
                 + DATEOFBIRTH_DESC_AMY + SEX_DESC_AMY,
                 new AddCommand(expectedPatient));

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -20,6 +21,7 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Appointment;
 import seedu.address.model.patient.DateOfBirth;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
@@ -43,7 +45,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
             + "[" + PREFIX_DATEOFBIRTH + "DATEOFBIRTH] "
-            + "[" + PREFIX_SEX + "SEX] \n"
+            + "[" + PREFIX_SEX + "SEX] "
+            + "[" + PREFIX_APPOINTMENT + "APPOINTMENT] \n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
@@ -101,8 +104,9 @@ public class EditCommand extends Command {
         Address updatedAddress = editPatientDescriptor.getAddress().orElse(patientToEdit.getAddress());
         DateOfBirth updatedDateOfBirth = editPatientDescriptor.getDateOfBirth().orElse(patientToEdit.getDateOfBirth());
         Sex updatedSex = editPatientDescriptor.getSex().orElse(patientToEdit.getSex());
+        Appointment updatedAppointment = editPatientDescriptor.getAppointment().orElse(patientToEdit.getAppointment());
 
-        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDateOfBirth, updatedSex);
+        return new Patient(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedDateOfBirth, updatedSex, updatedAppointment);
     }
 
     @Override
@@ -140,6 +144,7 @@ public class EditCommand extends Command {
         private Address address;
         private DateOfBirth dateOfBirth;
         private Sex sex;
+        private Appointment appointment;
 
         public EditPatientDescriptor() {}
 
@@ -154,13 +159,14 @@ public class EditCommand extends Command {
             setAddress(toCopy.address);
             setDateOfBirth(toCopy.dateOfBirth);
             setSex(toCopy.sex);
+            setAppointment(toCopy.appointment);
         }
 
         /**
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, sex);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, dateOfBirth, sex, appointment);
         }
 
         public void setName(Name name) {
@@ -211,6 +217,9 @@ public class EditCommand extends Command {
             return Optional.ofNullable(sex);
         }
 
+        public void setAppointment(Appointment appointment) { this.appointment = appointment; }
+
+        public Optional<Appointment> getAppointment() { return Optional.ofNullable(appointment); }
         @Override
         public boolean equals(Object other) {
             if (other == this) {
@@ -228,7 +237,8 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPatientDescriptor.email)
                     && Objects.equals(address, otherEditPatientDescriptor.address)
                     && Objects.equals(dateOfBirth, otherEditPatientDescriptor.dateOfBirth)
-                    && Objects.equals(sex, otherEditPatientDescriptor.sex);
+                    && Objects.equals(sex, otherEditPatientDescriptor.sex)
+                    && Objects.equals(appointment, otherEditPatientDescriptor.appointment);
         }
 
         @Override
@@ -240,6 +250,7 @@ public class EditCommand extends Command {
                     .add("address", address)
                     .add("date of birth", dateOfBirth)
                     .add("sex", sex)
+                    .add("appointment", appointment)
                     .toString();
         }
     }

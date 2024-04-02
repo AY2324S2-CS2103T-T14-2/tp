@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.patient.Address;
+import seedu.address.model.patient.Appointment;
 import seedu.address.model.patient.DateOfBirth;
 import seedu.address.model.patient.Email;
 import seedu.address.model.patient.Name;
@@ -24,6 +25,7 @@ class JsonAdaptedPerson {
     private final String address;
     private final String dateOfBirth;
     private final String sex;
+    private final String appointment;
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given patient details.
@@ -32,13 +34,14 @@ class JsonAdaptedPerson {
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("date of birth") String dateOfBirth,
-                             @JsonProperty("sex") String sex) {
+                             @JsonProperty("sex") String sex, @JsonProperty("appointment") String appointment) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
+        this.appointment = appointment;
     }
 
     /**
@@ -51,6 +54,7 @@ class JsonAdaptedPerson {
         address = source.getAddress().value;
         dateOfBirth = source.getDateOfBirth().dateOfBirth.toString();
         sex = source.getSex().sex.getLabel();
+        appointment = source.getAppointment().appointment == null ? "" : source.getAppointment().appointment.toString();
     }
 
     /**
@@ -110,7 +114,12 @@ class JsonAdaptedPerson {
         }
         final Sex modelSex = new Sex(sex);
 
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelDateOfBirth, modelSex);
+        if (!Appointment.isValidAppointment(appointment)) {
+            throw new IllegalValueException(Appointment.MESSAGE_CONSTRAINTS);
+        }
+        final Appointment modelAppointment = new Appointment(appointment);
+
+        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelDateOfBirth, modelSex, modelAppointment);
     }
 
 }
