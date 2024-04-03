@@ -22,7 +22,9 @@ import seedu.address.model.Model;
 import seedu.address.model.PatientList;
 import seedu.address.model.ReadOnlyPatientList;
 import seedu.address.model.ReadOnlyUserPrefs;
+import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
 import seedu.address.testutil.PatientBuilder;
 
 public class AddCommandTest {
@@ -139,6 +141,11 @@ public class AddCommandTest {
         }
 
         @Override
+        public boolean hasPatient(Name name, Phone phone) {
+            throw new AssertionError("This method should not be called");
+        }
+
+        @Override
         public void deletePatient(Patient target) {
             throw new AssertionError("This method should not be called.");
         }
@@ -156,6 +163,11 @@ public class AddCommandTest {
         @Override
         public void updateFilteredPatientList(Predicate<Patient> predicate) {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Patient getPatient(Name name, Phone phone) {
+            throw new AssertionError("This method should not be called");
         }
     }
 

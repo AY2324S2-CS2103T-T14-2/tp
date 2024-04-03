@@ -11,7 +11,9 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
 
 /**
  * Represents the in-memory model of the patient list data.
@@ -94,6 +96,12 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean hasPatient(Name name, Phone phone) {
+        requireAllNonNull(name, phone);
+        return patientList.hasPatient(name, phone);
+    }
+
+    @Override
     public void deletePatient(Patient target) {
         patientList.removePatient(target);
     }
@@ -109,6 +117,11 @@ public class ModelManager implements Model {
         requireAllNonNull(target, editedPatient);
 
         patientList.setPatient(target, editedPatient);
+    }
+
+    @Override
+    public Patient getPatient(Name name, Phone phone) {
+        return patientList.getPatient(name, phone);
     }
 
     //=========== Filtered Patient List Accessors =============================================================

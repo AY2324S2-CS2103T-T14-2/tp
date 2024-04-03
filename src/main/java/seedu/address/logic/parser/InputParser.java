@@ -9,10 +9,13 @@ import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.AddVisitCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAllCommand;
 import seedu.address.logic.commands.DeleteByIndexCommand;
+import seedu.address.logic.commands.DeleteVisitCommand;
 import seedu.address.logic.commands.EditCommand;
+import seedu.address.logic.commands.EditVisitCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ForceDeleteAllCommand;
@@ -58,14 +61,23 @@ public class InputParser {
         case AddCommand.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
+        case AddVisitCommand.COMMAND_WORD:
+            return new AddVisitCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
+
+        case EditVisitCommand.COMMAND_WORD:
+            return new EditVisitCommandParser().parse(arguments);
 
         case DeleteByIndexCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
         case DeleteAllCommand.COMMAND_WORD:
             return new DeleteAllCommand();
+
+        case DeleteVisitCommand.COMMAND_WORD:
+            return new DeleteVisitCommandParser().parse(arguments);
 
         case ForceDeleteAllCommand.COMMAND_WORD:
             return new ForceDeleteAllCommand();
