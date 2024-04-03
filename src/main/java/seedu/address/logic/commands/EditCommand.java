@@ -224,7 +224,7 @@ public class EditCommand extends Command {
         public Optional<Appointment> getAppointment() {
             return Optional.ofNullable(appointment);
         }
-
+        
         @Override
         public boolean equals(Object other) {
             if (other == this) {
