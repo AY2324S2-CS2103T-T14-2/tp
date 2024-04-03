@@ -60,8 +60,7 @@ public class PatientListParserTest {
         assertTrue(parser.parseCommand(NoCommand.COMMAND_WORD) instanceof NoCommand);
 
         assertTrue(parser.parseCommand(DeleteAllCommand.COMMAND_WORD) instanceof DeleteAllCommand);
-        assertThrows(ParseException.class, InputParser.getDeleteAllErrorMessage(),
-                () -> parser.parseCommand(EditCommand.COMMAND_WORD));
+        assertThrows(ParseException.class, InputParser.getDeleteAllErrorMessage(), () -> parser.parseCommand(EditCommand.COMMAND_WORD));
     }
 
     @Test
