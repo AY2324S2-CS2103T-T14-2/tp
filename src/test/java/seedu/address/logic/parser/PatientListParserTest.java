@@ -21,8 +21,11 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.ForceDeleteAllCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.NoCommand;
+import seedu.address.logic.commands.YesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
@@ -43,10 +46,27 @@ public class PatientListParserTest {
         assertEquals(new AddCommand(patient), command);
     }
 
+    /**
+     * Test for the delete-all command.
+     *
+     * @throws Exception Exception thrown by the parseCommand method.
+     */
     @Test
-    public void parseCommand_clear() throws Exception {
+    public void parseCommand_deleteAll() throws Exception {
         assertTrue(parser.parseCommand(DeleteAllCommand.COMMAND_WORD) instanceof DeleteAllCommand);
-        assertTrue(parser.parseCommand(DeleteAllCommand.COMMAND_WORD + " 3") instanceof DeleteAllCommand);
+        assertTrue(parser.parseCommand(YesCommand.COMMAND_WORD) instanceof YesCommand);
+
+        assertTrue(parser.parseCommand(DeleteAllCommand.COMMAND_WORD) instanceof DeleteAllCommand);
+        assertTrue(parser.parseCommand(NoCommand.COMMAND_WORD) instanceof NoCommand);
+
+        assertTrue(parser.parseCommand(DeleteAllCommand.COMMAND_WORD) instanceof DeleteAllCommand);
+        assertThrows(ParseException.class, InputParser.getDeleteAllErrorMessage(), ()
+                -> parser.parseCommand(EditCommand.COMMAND_WORD));
+    }
+
+    @Test
+    public void parseCommand_forceDeleteAll() throws Exception {
+        assertTrue(parser.parseCommand(ForceDeleteAllCommand.COMMAND_WORD) instanceof ForceDeleteAllCommand);
     }
 
     @Test

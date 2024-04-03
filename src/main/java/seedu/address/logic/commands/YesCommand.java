@@ -3,17 +3,14 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.model.Model;
+import seedu.address.model.PatientList;
 
 /**
- * Deletes all entries in the patient list.
+ * Yes command for 'delete-all' command, force delete all entries.
  */
-public class DeleteAllCommand extends Command {
-
-    public static final String COMMAND_WORD = "delete-all";
-    public static final String CONFIRMATION =
-            "Are you sure you want to delete all?"
-                    + "\nThis action is irreversible."
-                    + "\nIf yes, enter ‘yes’. If not, simply enter 'no'.";
+public class YesCommand extends Command {
+    public static final String COMMAND_WORD = "yes";
+    public static final String MESSAGE_SUCCESS = "Successfully deleted all data";
 
     /**
      * Executes the command and returns the result message.
@@ -24,6 +21,8 @@ public class DeleteAllCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult(CONFIRMATION);
+
+        model.setPatientList(new PatientList());
+        return new CommandResult(MESSAGE_SUCCESS);
     }
 }

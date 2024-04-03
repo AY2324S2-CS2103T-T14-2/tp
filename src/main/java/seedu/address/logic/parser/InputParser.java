@@ -19,18 +19,24 @@ import seedu.address.logic.commands.ForceDeleteAllCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoCommand;
+import seedu.address.logic.commands.YesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses user input.
  */
 public class InputParser {
+    private static final String DELETE_ALL_ERROR_MESSAGE =
+            "Please give either 'yes' or 'no' after 'delete-all' command!";
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(InputParser.class);
+
+    private boolean isPreviousCommandDeleteAll = false; // To check if the previous command was "delete-all"
+
 
     /**
      * Parses user input into command for execution.
@@ -53,6 +59,19 @@ public class InputParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        // Checking if the previous command was "delete-all"
+        if (isPreviousCommandDeleteAll) {
+            isPreviousCommandDeleteAll = false;
+
+            if (userInput.equals("yes")) {
+                return new YesCommand();
+            } else if (userInput.equals("no")) {
+                return new NoCommand();
+            } else {
+                throw new ParseException(DELETE_ALL_ERROR_MESSAGE);
+            }
+        }
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -65,6 +84,7 @@ public class InputParser {
             return new DeleteCommandParser().parse(arguments);
 
         case DeleteAllCommand.COMMAND_WORD:
+            isPreviousCommandDeleteAll = true;
             return new DeleteAllCommand();
 
         case ForceDeleteAllCommand.COMMAND_WORD:
@@ -82,13 +102,18 @@ public class InputParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case NoCommand.COMMAND_WORD:
-            return new NoCommand();
-
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }
 
+    /**
+     * Returns the error message for the delete-all command.
+     *
+     * @return The error message for the delete-all command.
+     */
+    public static String getDeleteAllErrorMessage() {
+        return DELETE_ALL_ERROR_MESSAGE;
+    }
 }
