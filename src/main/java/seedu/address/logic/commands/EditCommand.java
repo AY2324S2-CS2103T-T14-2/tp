@@ -217,9 +217,13 @@ public class EditCommand extends Command {
             return Optional.ofNullable(sex);
         }
 
-        public void setAppointment(Appointment appointment) { this.appointment = appointment; }
+        public void setAppointment(Appointment appointment) {
+            this.appointment = appointment;
+        }
 
-        public Optional<Appointment> getAppointment() { return Optional.ofNullable(appointment); }
+        public Optional<Appointment> getAppointment() {
+            return Optional.ofNullable(appointment);
+        }
         @Override
         public boolean equals(Object other) {
             if (other == this) {
