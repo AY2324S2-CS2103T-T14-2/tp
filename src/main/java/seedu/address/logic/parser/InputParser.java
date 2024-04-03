@@ -33,7 +33,7 @@ public class InputParser {
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(InputParser.class);
     private boolean isPreviousCommandDeleteAll = false; // To check if the previous command was "delete-all"
-    private String DeleteAllErrorMessage = "Please give either 'yes' or 'no' after 'delete-all' command!";
+    private String deleteAllErrorMessage = "Please give either 'yes' or 'no' after 'delete-all' command!";
 
 
     /**
@@ -66,7 +66,7 @@ public class InputParser {
             } else if (userInput.equals("no")) {
                 return new NoCommand();
             } else {
-                throw new ParseException(DeleteAllErrorMessage);
+                throw new ParseException(deleteAllErrorMessage);
             }
         }
 
