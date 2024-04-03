@@ -31,6 +31,20 @@
       <Label fx:id="address" styleClass="cell_small_label" text="\$address" />
       <Label fx:id="email" styleClass="cell_small_label" text="\$email" />
       <Label fx:id="sex" styleClass="cell_small_label" text="\$sex" />
+      <Label fx:id="appointment" styleClass="cell_small_label" text="\$appointment" />
+    </VBox>
+    <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+    </columnConstraints>
+    <VBox alignment="TOP_LEFT" minHeight="120" GridPane.columnIndex="1">
+      <padding>
+        <Insets top="5" right="5" bottom="5" left="15" />
+      </padding>
+      <Label fx:id="visit" text="Latest visit" styleClass="cell_big_label" />
+      <Label fx:id="hasLatestVisit" styleClass="cell_small_label" text="\$hasLatestVisit" />
+      <Label fx:id="dateOfVisit" styleClass="cell_small_label" text="\$dateOfVisit" />
+      <Label fx:id="condition" styleClass="cell_small_label" text="\$condition" />
+      <Label fx:id="severity" styleClass="cell_small_label" text="\$severity" />
     </VBox>
   </GridPane>
 </HBox>

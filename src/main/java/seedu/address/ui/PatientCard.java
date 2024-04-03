@@ -5,9 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Visit;
 
 /**
- * An UI component that displays information of a {@code Patient}.
+ * A UI component that displays information of a {@code Patient}.
  */
 public class PatientCard extends UiPart<Region> {
 
@@ -37,6 +38,18 @@ public class PatientCard extends UiPart<Region> {
     private Label dateOfBirth;
     @FXML
     private Label sex;
+    @FXML
+    private Label appointment;
+    @FXML
+    private Label visit;
+    @FXML
+    private Label hasLatestVisit;
+    @FXML
+    private Label dateOfVisit;
+    @FXML
+    private Label condition;
+    @FXML
+    private Label severity;
 
     /**
      * Creates a {@code PatientCard} with the given {@code Patient} and index to display.
@@ -51,5 +64,24 @@ public class PatientCard extends UiPart<Region> {
         email.setText(patient.getEmail().value);
         dateOfBirth.setText(patient.getDateOfBirth().toString());
         sex.setText(patient.getSex().toString());
+
+        if (patient.getAppointment().appointment == null) {
+            appointment.setText("");
+        } else {
+            appointment.setText("Next appointment: " + patient.getAppointment().toString());
+        }
+
+        if (!patient.getVisits().isEmpty()) {
+            Visit latest = patient.getLatestVisit();
+            hasLatestVisit.setText("");
+            dateOfVisit.setText("Date: " + latest.getDateOfVisit().toString());
+            condition.setText("Condition: " + latest.getCondition().value);
+            severity.setText("Severity: " + latest.getSeverity().toString());
+        } else {
+            hasLatestVisit.setText("None");
+            dateOfVisit.setText("");
+            condition.setText("");
+            severity.setText("");
+        }
     }
 }

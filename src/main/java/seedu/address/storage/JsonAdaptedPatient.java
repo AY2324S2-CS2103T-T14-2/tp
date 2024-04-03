@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,12 +16,15 @@ import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
 import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.Sex;
+import seedu.address.model.patient.Visit;
+
 /**
  * Jackson-friendly version of {@link Patient}.
  */
 class JsonAdaptedPatient {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Patient's %s field is missing!";
+    public static final String MESSAGE_DUPLICATE_VISIT = "Patient has duplicate visit(s).";
 
     private final String name;
     private final String phone;
@@ -26,6 +33,7 @@ class JsonAdaptedPatient {
     private final String dateOfBirth;
     private final String sex;
     private final String appointment;
+    private final List<JsonAdaptedVisit> visits = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPatient} with the given patient details.
@@ -34,7 +42,8 @@ class JsonAdaptedPatient {
     public JsonAdaptedPatient(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
                              @JsonProperty("date of birth") String dateOfBirth,
-                             @JsonProperty("sex") String sex, @JsonProperty("appointment") String appointment) {
+                             @JsonProperty("sex") String sex, @JsonProperty("appointment") String appointment,
+                              @JsonProperty("visits") List<JsonAdaptedVisit> visits) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -42,6 +51,7 @@ class JsonAdaptedPatient {
         this.dateOfBirth = dateOfBirth;
         this.sex = sex;
         this.appointment = appointment;
+        this.visits.addAll(visits);
     }
 
     /**
@@ -55,6 +65,7 @@ class JsonAdaptedPatient {
         dateOfBirth = source.getDateOfBirth().dateOfBirth.toString();
         sex = source.getSex().sex.getLabel();
         appointment = source.getAppointment().appointment == null ? "" : source.getAppointment().appointment.toString();
+        visits.addAll(source.getVisits().stream().map(JsonAdaptedVisit::new).collect(Collectors.toList()));
     }
 
     /**
@@ -119,8 +130,18 @@ class JsonAdaptedPatient {
         }
         final Appointment modelAppointment = new Appointment(appointment);
 
-        return new Patient(modelName, modelPhone, modelEmail, modelAddress, modelDateOfBirth, modelSex,
+        Patient patient = new Patient(modelName, modelPhone, modelEmail, modelAddress, modelDateOfBirth, modelSex,
                 modelAppointment);
+
+        for (JsonAdaptedVisit jsonAdaptedVisit : visits) {
+            Visit visit = jsonAdaptedVisit.toModelType();
+            if (patient.hasVisit(visit)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_VISIT);
+            }
+            patient.addVisit(visit);
+        }
+
+        return patient;
     }
 
 }
