@@ -26,14 +26,15 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class InputParser {
+    private static final String DELETE_ALL_ERROR_MESSAGE = "Please give either 'yes' or 'no' after 'delete-all' command!";
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(InputParser.class);
+
     private boolean isPreviousCommandDeleteAll = false; // To check if the previous command was "delete-all"
-    public static String DELETE_ALL_ERROR_MESSAGE = "Please give either 'yes' or 'no' after 'delete-all' command!";
 
 
     /**
@@ -106,4 +107,12 @@ public class InputParser {
         }
     }
 
+    /**
+     * Returns the error message for the delete-all command.
+     *
+     * @return The error message for the delete-all command.
+     */
+    public static String getDeleteAllErrorMessage() {
+        return DELETE_ALL_ERROR_MESSAGE;
+    }
 }
