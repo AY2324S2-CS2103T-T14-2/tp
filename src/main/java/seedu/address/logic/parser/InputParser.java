@@ -26,7 +26,8 @@ import seedu.address.logic.parser.exceptions.ParseException;
  * Parses user input.
  */
 public class InputParser {
-    private static final String DELETE_ALL_ERROR_MESSAGE = "Please give either 'yes' or 'no' after 'delete-all' command!";
+    private static final String DELETE_ALL_ERROR_MESSAGE =
+            "Please give either 'yes' or 'no' after 'delete-all' command!";
 
     /**
      * Used for initial separation of command word and args.
