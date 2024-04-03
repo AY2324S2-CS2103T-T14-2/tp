@@ -5,7 +5,7 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.model.Model;
 
 /**
- * No command, do nothing.
+ * No command for 'delete-all' command, do nothing.
  */
 public class NoCommand extends Command {
     public static final String COMMAND_WORD = "no";
