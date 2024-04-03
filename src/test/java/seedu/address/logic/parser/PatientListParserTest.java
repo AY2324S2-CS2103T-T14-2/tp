@@ -27,8 +27,6 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoCommand;
 import seedu.address.logic.commands.YesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.patient.NameContainsKeywordsPredicate;
 import seedu.address.model.patient.Patient;
 import seedu.address.testutil.EditPatientDescriptorBuilder;
@@ -51,7 +49,7 @@ public class PatientListParserTest {
     /**
      * Test for the delete-all command.
      *
-     * @throws Exception
+     * @throws Exception Exception thrown by the parseCommand method.
      */
     @Test
     public void parseCommand_deleteAll() throws Exception {
