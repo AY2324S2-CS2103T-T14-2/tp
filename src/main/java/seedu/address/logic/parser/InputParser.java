@@ -19,6 +19,7 @@ import seedu.address.logic.commands.ForceDeleteAllCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoCommand;
+import seedu.address.logic.commands.YesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -31,6 +32,9 @@ public class InputParser {
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
     private static final Logger logger = LogsCenter.getLogger(InputParser.class);
+    private boolean isPreviousCommandDeleteAll = false; // To check if the previous command was "delete-all"
+    private String DeleteAllErrorMessage = "Please give either 'yes' or 'no' after 'delete-all' command!";
+
 
     /**
      * Parses user input into command for execution.
@@ -53,6 +57,19 @@ public class InputParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
 
+        // Checking if the previous command was "delete-all"
+        if (isPreviousCommandDeleteAll) {
+            isPreviousCommandDeleteAll = false;
+
+            if (userInput.equals("yes")) {
+                return new YesCommand();
+            } else if (userInput.equals("no")) {
+                return new NoCommand();
+            } else {
+                throw new ParseException(DeleteAllErrorMessage);
+            }
+        }
+
         switch (commandWord) {
 
         case AddCommand.COMMAND_WORD:
@@ -65,6 +82,7 @@ public class InputParser {
             return new DeleteCommandParser().parse(arguments);
 
         case DeleteAllCommand.COMMAND_WORD:
+            isPreviousCommandDeleteAll = true;
             return new DeleteAllCommand();
 
         case ForceDeleteAllCommand.COMMAND_WORD:
@@ -81,9 +99,6 @@ public class InputParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
-
-        case NoCommand.COMMAND_WORD:
-            return new NoCommand();
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
