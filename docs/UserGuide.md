@@ -162,8 +162,8 @@ Format: `editv INDEX [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY`] or `editv n/N
 * The specified patient will move to the bottom of the patient list
 
 Examples:
-* `editv 1 d/25/2/2024`
-* `editv n/Alex Yeoh p/87438807 c/Sore throat v/Low`
+* `editv 1 d/25/2/2024` Edits the visit date of the 1st patient to `25/2/2024`
+* `editv n/Alex Yeoh p/87438807 c/Sore throat v/Low` Edits the condition and severity of `Alex Yeoh` with `87438807` to `Sore throat` and `Low`.
 
 ### Locating patients by name: `find`
 
@@ -305,19 +305,19 @@ Furthermore, certain edits can cause the MediTrack to behave in unexpected ways 
 
 ## Command summary
 
-| Action             | Format, Examples                                                                                                                                                                                          |
-|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add Patient**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH s/SEX` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/25/2/2024 s/Male`                           |
-| **Add Visit**      | `addv INDEX d/DATE_OF_VISIT c/CONDITION v/SEVERITY` or <br> `addv n/NAME p/PHONE_NUMBER d/DATE_OF_VISIT c/CONDITION v/SEVERITY` <br> e.g., `addv 1 d/25/2/2024 c/Mild Fever v/Low`                        |
-| **Delete by index**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                       
-| **Delete by name and phone**          | `delete-p n/NAME p/PHONE_NUMBER`<br> e.g. `delete-p n/Jaeho p/22224444`                                                                                                                                   
-| **Delete all**         | `delete-all`                                                                                                                                                                                              
-| **Force delete all**         | `delete-all-f`                                                                                                                                                                                            |
-| **Delete Visit**   | `deletev INDEX` or <br> `deletev n/NAME p/PHONE_NUMBER`<br> e.g., `deletev 3`                                                                                                                             |
-| **Edit Patient**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [s/SEX] [o/APPOINTMENT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
-| **Edit Visit**     | `editv INDEX [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY`] or <br> `editv n/NAME p/PHONE_NUMBER [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY]`<br> e.g.,`editv n/Alex Yeoh p/87438807 c/Sore throat v/Low` |
-| **Find**           | `find [n/KEYWORDS] [p/PHONE_NUMBER]`<br> e.g., `find n/John p/98765432`                                                                                                                                   |
-| **List**           | `list`                                                                                                                                                                                                    |
-| **Help**           | `help`                                                                                                                                                                                                    
-| **Exit**           | `exit`                                                                                                                                                                                                    
-| **Force exit**           | `exit-f`                                                                                                                                                                                                  |
+| Action             | Format, Examples                                                                                                                                                                                                                                                                  |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Patient**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH s/SEX` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/25/2/2024 s/Male`                                                                                                   |
+| **Add Visit**      | `addv INDEX d/DATE_OF_VISIT c/CONDITION v/SEVERITY` or <br> `addv n/NAME p/PHONE_NUMBER d/DATE_OF_VISIT c/CONDITION v/SEVERITY` <br> e.g., `addv 1 d/25/2/2024 c/Mild Fever v/Low`                                                                                                |
+| **Delete by index**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                                                                               
+| **Delete by name and phone**          | `delete-p n/NAME p/PHONE_NUMBER`<br> e.g. `delete-p n/Jaeho p/22224444`                                                                                                                                                                                                           
+| **Delete all**         | `delete-all`                                                                                                                                                                                                                                                                      
+| **Force delete all**         | `delete-all-f`                                                                                                                                                                                                                                                                    |
+| **Delete Visit**   | `deletev INDEX` or <br> `deletev n/NAME p/PHONE_NUMBER`<br> e.g., `deletev 3`                                                                                                                                                                                                     |
+| **Edit Patient**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [b/DATE_OF_BIRTH] [s/SEX] [o/APPOINTMENT]` or <br> `edit n/NAME p/PHONE_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATEOFBIRTH] [s/SEX] [o/APPOINTMENT]`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com` |
+| **Edit Visit**     | `editv INDEX [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY`] or <br> `editv n/NAME p/PHONE_NUMBER [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY]`<br> e.g.,`editv n/Alex Yeoh p/87438807 c/Sore throat v/Low`                                                                         |
+| **Find**           | `find [n/KEYWORDS] [p/PHONE_NUMBER]`<br> e.g., `find n/John p/98765432`                                                                                                                                                                                                           |
+| **List**           | `list`                                                                                                                                                                                                                                                                            |
+| **Help**           | `help`                                                                                                                                                                                                                                                                            
+| **Exit**           | `exit`                                                                                                                                                                                                                                                                            
+| **Force exit**           | `exit-f`                                                                                                                                                                                                                                                                          |
