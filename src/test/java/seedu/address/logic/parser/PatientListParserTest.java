@@ -19,7 +19,6 @@ import seedu.address.logic.commands.DeleteAllCommand;
 import seedu.address.logic.commands.DeleteByIndexCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
-import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ForceDeleteAllCommand;
 import seedu.address.logic.commands.ForceExitCommand;
