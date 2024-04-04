@@ -16,6 +16,11 @@ public class YesCommand extends Command {
 
     private String previousCommand;
 
+    /**
+     * Constructor for YesCommand.
+     *
+     * @param previousCommand The previous command that was executed.
+     */
     public YesCommand(String previousCommand) {
         super();
         this.previousCommand = previousCommand;
