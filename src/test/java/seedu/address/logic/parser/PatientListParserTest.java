@@ -22,6 +22,7 @@ import seedu.address.logic.commands.EditCommand.EditPatientDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ForceDeleteAllCommand;
+import seedu.address.logic.commands.ForceExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoCommand;
@@ -86,9 +87,9 @@ public class PatientListParserTest {
     }
 
     @Test
-    public void parseCommand_exit() throws Exception {
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD) instanceof ExitCommand);
-        assertTrue(parser.parseCommand(ExitCommand.COMMAND_WORD + " 3") instanceof ExitCommand);
+    public void parseCommand_forceExit() throws Exception {
+        assertTrue(parser.parseCommand(ForceExitCommand.COMMAND_WORD) instanceof ForceExitCommand);
+        assertTrue(parser.parseCommand(ForceExitCommand.COMMAND_WORD + " 3") instanceof ForceExitCommand);
     }
 
     @Test
