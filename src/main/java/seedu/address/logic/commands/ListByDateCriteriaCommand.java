@@ -4,14 +4,11 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_VISIT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.PatientList;
 import seedu.address.model.patient.ApptDateMatchesPredicate;
 import seedu.address.model.patient.Patient;
 

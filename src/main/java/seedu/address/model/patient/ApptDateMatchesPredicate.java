@@ -4,7 +4,10 @@ import java.time.LocalDate;
 import java.util.function.Predicate;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.patient.Appointment;
+
+/**
+ * Predicate for appointment date.
+ */
 public class ApptDateMatchesPredicate implements Predicate<Patient> {
     private final LocalDate apptDate;
 
