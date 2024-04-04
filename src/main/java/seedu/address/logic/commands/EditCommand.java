@@ -75,6 +75,11 @@ public class EditCommand extends Command {
         useIndex = true;
     }
 
+    /**
+     * @param name name of the patient in the filtered patient list to edit
+     * @param phone phone number of the patient in the filtered patient list to edit
+     * @param editPatientDescriptor details to edit the patient with
+     */
     public EditCommand(Name name, Phone phone, EditPatientDescriptor editPatientDescriptor) {
         requireNonNull(name);
         requireNonNull(phone);
@@ -99,7 +104,8 @@ public class EditCommand extends Command {
         if (useIndex) {
             patientToEdit = lastShownList.get(index.getZeroBased());
         } else {
-            Predicate<Patient> preodicate = patient -> patient.getName().equals(name) && patient.getPhone().equals(phone);
+            Predicate<Patient> preodicate = patient -> patient.getName().equals(name)
+                    && patient.getPhone().equals(phone);
             patientToEdit = lastShownList.stream().filter(preodicate).findFirst().get();
         }
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
