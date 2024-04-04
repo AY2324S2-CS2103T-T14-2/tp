@@ -112,7 +112,7 @@ Format: `list-by-date`
 
 Shows a list of all patients in the address book whose appointments fall on or before the given date.
 
-Format: `list-until-date d/dd/mm/yyyy`
+Format: `list-until-date o/dd/mm/yyyy`
 
 Examples:
 * `list-until-date d/13/01/2024` Displays all patients with appointments on or before 13 January 2024.
