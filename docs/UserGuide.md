@@ -6,7 +6,7 @@
 
 # MediTrack User Guide
 
-MediTrack is a **desktop app for managing patient details, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your patient management tasks done faster than traditional GUI apps.
+MediTrack is a **desktop app for managing patient details, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediTrack can get your patient management tasks done faster than traditional GUI apps.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -17,24 +17,22 @@ MediTrack is a **desktop app for managing patient details, optimized for use via
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `MediTrack.jar` from [here](https://github.com/AY2324S2-CS2103T-T14-2/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for MediTrack.
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar addressbook.jar` command to run the application.<br>
+1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar MediTrack.jar` command to run the application. <br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * `list` : Lists all contacts.
+   * `list` : Lists all patients.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/25/2/2024 s/Male` : Adds a patient named `John Doe` to the patient list.
 
-   * `delete 3` : Deletes the 3rd contact shown in the current list.
-
-   * `clear` : Deletes all contacts.
+   * `delete 3` : Deletes the 3rd patient shown in the current list.
 
    * `exit` : Exits the app.
 
@@ -52,23 +50,20 @@ MediTrack is a **desktop app for managing patient details, optimized for use via
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
 
 * Items in square brackets are optional.<br>
-  e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
-
-* Items with `…`​ after them can be used multiple times including zero times.<br>
-  e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
+  e.g. `n/NAME [o/APPOINTMENT]` can be used as `n/John Doe o/2024-4-1` or as `n/John Doe`.
 
 * Parameters can be in any order.<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing help, accessing user guide : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message that provides the link to the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -77,111 +72,196 @@ Format: `help`
 
 ### Adding a patient: `add`
 
-Adds a patient to the address book.
+Adds a patient to the patient list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH s/Sex`
 
-<box type="tip" seamless>
+<box type="info" seamless>
 
-**Tip:** A patient can have any number of tags (including 0)
+**Note:** Appointment field can only be edited after adding the patient into the patient list
 </box>
 
+Example:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2001-1-1 s/Male`
+
+### Adding a visit to a patient: `addv`
+
+Adds a visit to a patient.
+
+Format: `addv INDEX d/DATE_OF_VISIT c/CONDITION v/SEVERITY` or `addv n/NAME p/PHONE_NUMBER d/DATE_OF_VISIT c/CONDITION v/SEVERITY`
+
+* Adds a new visit to the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+* The new visit will be the one shown in the UI
+* The specified patient will move to the bottom of the patient list
+
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addv 1 d/25/2/2024 c/Mild Fever v/Low`
+* `addv n/Alex Yeoh p/87438807 d/25/2/2024 c/High Fever v/High`
 
 ### Listing all patients : `list`
 
-Shows a list of all patients in the address book.
+Shows a list of all patients in the patient list.
 
 Format: `list`
 
 ### Editing a patient : `edit`
 
-Edits an existing patient in the address book.
+Edits an existing patient in the patient list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATEOFBIRTH] [s/SEX] [o/APPOINTMENT]`
 
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
-* You can remove all the patient’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd patient to be `Betsy Crower`.
+
+### Editing the latest visit of a patient: `editv`
+
+Edits the displayed visit of a patient.
+
+Format: `editv INDEX [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY`] or `editv n/NAME p/PHONE_NUMBER [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY]`
+
+* Edits the latest visit of the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+* At least one of the optional fields must be provided.
+* The edited visit will be the one shown in the UI
+* The specified patient will move to the bottom of the patient list
+
+Examples:
+* `editv 1 d/25/2/2024`
+* `editv n/Alex Yeoh p/87438807 c/Sore throat v/Low`
 
 ### Locating patients by name: `find`
 
-Finds patients whose names contain any of the given keywords.
+Finds patients whose name contains the given keyword and/or whose phone number matches the given one.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find [n/KEYWORDS] [p/PHONE_NUMBER]`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
+* At least one of the optional fields must be provided.
+* If both fields are provided, patient must meet both conditions to be listed.
+* The search for name is case-insensitive. e.g. `hans` will match `Hans`
 * The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
+* Keywords must be separated by a space to be recognised as distinct.
 * Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
+* Patients matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+* Unlike keywords, only 1 phone number can be provided e.g. `p/98765432 97538642` is invalid.
 
 Examples:
-* `find John` returns `john` and `John Doe`
-* `find alex david` returns `Alex Yeoh`, `David Li`<br>
-  ![result for 'find alex david'](images/findAlexDavidResult.png)
+* `find n/John` returns `john` and `John Doe`
+* `find n/John p/98765432` returns a patient with name `john` and phone number `98765432`
+* `find n/alex roy` returns `Alex Yeoh`, `Roy Balakrishnan`<br>
+  ![result for 'find n/alex roy'](images/findAlexRoyResult.png)
 
-### Deleting a patient : `delete`
+### Deleting a patient using index number within the patient list : `delete`
 
-Deletes the specified patient from the address book.
+Deletes the patient at the specified index within the patient list.
 
 Format: `delete INDEX`
+
+Example input: delete 1
+
+Expected output on success: “Successfully deleted patient NAME’s data”
+
+Expected output on failure:
+If the specified index is out of bounds: “The patient index provided is invalid”
 
 * Deletes the patient at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
+### Deleting a specific patient using name and phone number : `delete-p`
+
+Deletes the patient with the specified name and phone number within the patient list.
+
+Format: `delete-p n/NAME p/PHONE_NUMBER`
+
+Acceptable inputs: Refer to the respective rules under the 'add' command
+
+Example input: delete n/Eugene Hirose p/90807561
+
+Expected output on success: “Successfully deleted patient NAME’s data”
+
+Expected output on failure:
+* If the patient name or phone number does not match: “There is no patient with name NAME and phone number PHONE_NUMBER”
+* If missing/invalid input in any of the required fields: “Invalid input format”
+
+
+### Deleting all entries : `delete-all`
+
+Lets the system know the user wants to delete all entries from the patient list.
+
+Format: `delete-all`
+
+Expected output: “Are you sure you want to delete all? This action is irreversible. If so, enter ‘yes’. If not, simply enter 'no'.” 
+* Subsequent input option 1: "yes"
+  * Expected output: Shows empty list of patients 
+* Subsequent input option 2: "no"
+  * Expected output: Shows no change to the list 
+* Subsequent input option 3: any input other than "yes" or "no" 
+  * Expected output: “Please give either 'yes' or 'no' after 'delete-all' command!”
+
+### Forcefully deleting all entries : `delete-all-f`
+
+Forcefully deletes all entries from the patient list.
+
+Format: `delete-all-f`
+
+Expected output: Shows empty list of patients
+
+### Deleting the latest visit of a patient: `deletev`
+
+Deletes the displayed visit of a patient.
+
+Format: `deletev INDEX` or `deletev n/NAME p/PHONE_NUMBER`
+
+* Deletes the latest visit of the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+* The new visit displayed will be the one added before the deleted visit, if there is one
+* The specified patient will move to the bottom of the patient list
+
 Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
-
-### Clearing all entries : `clear`
-
-Clears all entries from the address book.
-
-Format: `clear`
+* `deletev 1`
+* `deletev n/Alex Yeoh p/87438807`
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Lets the system know the user wants to exit the program.
 
 Format: `exit`
 
-### Saving the data
+Expected output: “Would you like to exit the application? Enter ‘yes’ or ‘no’.”
+* Subsequent input option 1: "yes"
+    * Expected output: Closes the application
+* Subsequent input option 2: "no"
+    * Expected output: None
+* Subsequent input option 3: any input other than "yes" or "no"
+    * Expected output: "Please give either 'yes' or 'no' after 'exit' command!"
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+### Forcefully exiting the program : `exit-f`
+
+Forcefully exits the program.
+
+Format: `exit-f`
+
+Expected output: The application gets closed
 
 ### Editing the data file
 
-AddressBook data are saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. Advanced users are welcome to update data directly by editing that data file.
+MediTrack data are saved automatically as a JSON file `[JAR file location]/data/patientlist.json`. Advanced users are welcome to update data directly by editing that data file.
 
 <box type="warning" seamless>
 
 **Caution:**
-If your changes to the data file makes its format invalid, AddressBook will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
-Furthermore, certain edits can cause the AddressBook to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+If your changes to the data file makes its format invalid, MediTrack will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
+Furthermore, certain edits can cause the MediTrack to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
---------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous MediTrack home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -193,12 +273,19 @@ _Details coming soon ..._
 
 ## Command summary
 
-Action     | Format, Examples
------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
-**Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
-**Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
-**List**   | `list`
-**Help**   | `help`
+| Action             | Format, Examples                                                                                                                                                                                          |
+|--------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add Patient**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH s/SEX` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/25/2/2024 s/Male`                           |
+| **Add Visit**      | `addv INDEX d/DATE_OF_VISIT c/CONDITION v/SEVERITY` or <br> `addv n/NAME p/PHONE_NUMBER d/DATE_OF_VISIT c/CONDITION v/SEVERITY` <br> e.g., `addv 1 d/25/2/2024 c/Mild Fever v/Low`                        |
+| **Delete by index**          | `delete INDEX`<br> e.g., `delete 3`
+| **Delete by name and phone**          | `delete-p n/NAME p/PHONE_NUMBER`<br> e.g. `delete-p n/Jaeho p/22224444`
+| **Delete all**         | `delete-all`    
+| **Force delete all**         | `delete-all-f`    |
+| **Delete Visit**   | `deletev INDEX` or <br> `deletev n/NAME p/PHONE_NUMBER`<br> e.g., `deletev 3`                                                                                                                             |
+| **Edit Patient**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                                               |
+| **Edit Visit**     | `editv INDEX [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY`] or <br> `editv n/NAME p/PHONE_NUMBER [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY]`<br> e.g.,`editv n/Alex Yeoh p/87438807 c/Sore throat v/Low` |
+| **Find**           | `find [n/KEYWORDS] [p/PHONE_NUMBER]`<br> e.g., `find n/John p/98765432`                                                                                                                                   |
+| **List**           | `list`                                                                                                                                                                                                    |
+| **Help**           | `help`         
+| **Exit**           | `exit`         
+| **Force exit**           | `exit-f`         |

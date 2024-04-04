@@ -1,6 +1,7 @@
 package seedu.address.testutil;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DATEOFBIRTH;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -20,13 +21,13 @@ public class PatientUtil {
      * Returns an add command string for adding the {@code patient}.
      */
     public static String getAddCommand(Patient patient) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(patient);
+        return AddCommand.COMMAND_WORD + " " + getPatientDetails(patient);
     }
 
     /**
      * Returns the part of command string for the given {@code patient}'s details.
      */
-    public static String getPersonDetails(Patient patient) {
+    public static String getPatientDetails(Patient patient) {
         StringBuilder sb = new StringBuilder();
         sb.append(PREFIX_NAME + patient.getName().fullName + " ");
         sb.append(PREFIX_PHONE + patient.getPhone().value + " ");
@@ -34,14 +35,13 @@ public class PatientUtil {
         sb.append(PREFIX_ADDRESS + patient.getAddress().value + " ");
         sb.append(PREFIX_DATEOFBIRTH + patient.getDateOfBirth().toString() + " ");
         sb.append(PREFIX_SEX + patient.getSex().toString() + " ");
-        System.out.println(sb.toString());
         return sb.toString();
     }
 
     /**
      * Returns the part of command string for the given {@code EditPersonDescriptor}'s details.
      */
-    public static String getEditPersonDescriptorDetails(EditPatientDescriptor descriptor) {
+    public static String getEditPatientDescriptorDetails(EditPatientDescriptor descriptor) {
         StringBuilder sb = new StringBuilder();
         descriptor.getName().ifPresent(name -> sb.append(PREFIX_NAME).append(name.fullName).append(" "));
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.value).append(" "));
@@ -49,6 +49,9 @@ public class PatientUtil {
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
         descriptor.getDateOfBirth().ifPresent(dateOfBirth -> sb.append(PREFIX_DATEOFBIRTH)
                 .append(dateOfBirth.dateOfBirth).append(" "));
+        descriptor.getSex().ifPresent(sex -> sb.append(PREFIX_SEX).append(sex.sex.getLabel()).append(" "));
+        descriptor.getAppointment().ifPresent(appointment -> sb.append(PREFIX_APPOINTMENT)
+                .append(appointment.appointment == null ? "" : appointment.appointment).append(" "));
         return sb.toString();
     }
 }

@@ -13,6 +13,8 @@
 
 ## **Acknowledgements**
 
+- [Regular-Expressions.info](https://www.regular-expressions.info/tutorial.html) was our source for learning regex.
+
 _{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
 
 --------------------------------------------------------------------------------------------------------------------
@@ -90,19 +92,19 @@ Here's a (partial) class diagram of the `Logic` component:
 
 <puml src="diagrams/LogicClassDiagram.puml" width="550"/>
 
-The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("delete 1")` API call as an example.
+The sequence diagram below illustrates the interactions within the `Logic` component, taking `execute("find n/Bob")` API call as an example.
 
-<puml src="diagrams/DeleteSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `delete 1` Command" />
+<puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions Inside the Logic Component for the `find n/Bob` Command" />
 
-< type="info" seamless>
+<box type="info" seamless>
 
-**Note:** The lifeline for `DeleteCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
+**Note:** The lifeline for `FindCommandParser` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline continues till the end of diagram.
 </box>
 
 How the `Logic` component works:
 
-1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `FindCommandParser`) and uses it to parse the command.
+1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `FindCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a patient).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
@@ -123,19 +125,10 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Person` objects (which are contained in a `UniquePersonList` object).
-* stores the currently 'selected' `Person` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the address book data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
+* stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
-
-<box type="info" seamless>
-
-**Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique tag, instead of each `Person` needing their own `Tag` objects.<br>
-
-<puml src="diagrams/BetterModelClassDiagram.puml" width="450" />
-
-</box>
-
 
 ### Storage component
 
@@ -157,6 +150,93 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Find feature
+
+#### Implementation
+
+The `find` feature is implemented by using the `ArgumentTokenizer`, `ArgumentMultimap` and `Prefix` classes. `Prefix` 
+represents argument prefixes such as `n/` for names. In combination with the below methods, the parser can access different parts
+of the argument based on the prefixes:
+
+* `ArgumentTokenizer#tokenize(String argsString, Prefix... prefixes)` — Generates an `ArgumentMultimap` object which contains
+information on string argument mapped to each prefix.
+* `ArgumentMultimap#getPreamble()` — Returns the part of the argument before any prefixes.
+* `ArgumentMultimap#getValue(Prefix prefix)` — Returns the part of the argument belonging to the given prefix.
+
+The following activity diagram describes the operation of `FindCommandParser`:
+
+<puml src="diagrams/FindActivityDiagram.puml" alt="FindActivityDiagram" />
+
+Each valid prefix is checked, and if found, the value proceeding it in the argument string is saved in the form of a subclass 
+of `Predicate`. Otherwise, a `Predicate` that always returns true is used instead. When `FindCommand` is created, all of the 
+`Predicate` are passed into it, which will be chained into a singular `Predicate` such that the `Model` component can use to update 
+the `PatientList`.
+
+The operation returns an error if:
+* There is redundant argument before valid prefixes.
+* None of the valid prefixes are provided.
+* There are duplicate prefixes.
+* The arguments provided have invalid format with respect to their prefixes, e.g. argument for `p/` prefix contains letters.
+
+
+
+
+#### Design considerations
+
+The current design was chosen to allow for addition of more `find` conditions in later iterations. With the current implementation, only
+the `FindCommandParser` class needs to be changed, as well as the creation of a new `Predicate` subclass.
+
+An alternative was to use a flag to denote the condition to filter the list by. For example, if a user wishes to find a patient with
+the name `Bob`, the command would be `find-n Bob`. This was rejected as it only allows for finding with a single condition, leading 
+to a less flexible feature.
+
+
+
+### List in alphabetical order feature
+
+#### Implementation
+
+The list in alphabetical order feature is implemented by using the `ArrayList` and `Comparator` classes. `ArrayList` is used to manage the list of `Patients` while `Comparator` is used to compare the `fullName` of each `Patient`.
+
+The implementation of the `list` command works as follows.
+
+Upon the user's entering the `list` command, after checking that the list of patients is not empty, a list of all `Patients` is retrieved from the `Model` object and added to a separate `ArrayList`. From there, a `Comparator` is created that sorts the list of `Patients` using their `fullName`. Then, each element from the `ArrayList` is removed then added in the correct alphabetical order. Once this is completed, the `CommandResult` returns successfully and displays the correct output, a list of all patients in alphabetical order.
+
+The following sequence diagram shows the sequence of events when the 'list' command is typed by a user.
+
+<puml src="diagrams/ListSequenceDiagram.puml" alt="ListSequenceDiagram" />
+
+#### Design considerations
+
+The current design was chosen as the existing list of `Patients` in the `Model` object, `getFilteredPersonList()`, is an immutable object that necessitated the creation of an `ArrayList` object, though it may be inefficient.
+
+
+### Delete All feature
+
+#### Implementation
+
+The feature of deleting all entries is implemented via two separate commands (DeleteAllCommand and ForceDeleteAllCommand).
+When the user enters 'delete-all' command, AddressBookParser parses the command into a DeleteAllCommand.
+The LogicManager executes the DeleteAllCommand. This would return a CommandResult with a confirmation message,
+which asks if the user wants to truly delete all entries. When prompted with the confirmation message, the user would 
+have the choice to enter 'delete-all-f' command or to cancel the 'delete-all' command.
+When the 'delete-all-f' command is entered, AddressBookParser would parse the command into a ForceDeleteAllCommand.
+The LogicManager would execute the ForceDeleteAllCommand. This would set the current model of the patient list to clear 
+out all existing entries by calling setAddressBook method with an empty AddressBook object used as its argument.
+A CommandResult object would be returned with a success message that states that all data has been successfully deleted.
+
+The following sequence diagram describes the sequence of logic when the user inputs 'delete-all-f' command:
+
+<puml src="diagrams/ForceDeleteAllSequenceDiagram-Logic.puml" alt="ForceDeleteAllSequenceDiagram" />
+
+#### Design considerations
+
+The current design was chosen so that there is a safety check mechanism that asks for confirmation from the user if the
+user truly wants to delete all entries when the 'delete-all' command is given. 
+If the user wishes to bypass the safety check and is certain of the intent to delete all entries, the user can enter 
+'delete-all-f' command to forcefully delete all entries.
+
 
 ### \[Proposed\] Undo/redo feature
 
