@@ -66,9 +66,9 @@ MediTrack is a **desktop app for managing patient details, optimized for use via
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </box>
 
-### Viewing help : `help`
+### Viewing help, accessing user guide : `help`
 
-Shows a message explaning how to access the help page.
+Shows a message that provides the link to the user guide.
 
 ![help message](images/helpMessage.png)
 
@@ -131,35 +131,83 @@ Examples:
 * `find alex david` returns `Alex Yeoh`, `David Li`<br>
   ![result for 'find alex david'](images/findAlexDavidResult.png)
 
-### Deleting a patient : `delete`
+### Deleting a patient using index number within the patient list : `delete`
 
-Deletes the specified patient from the address book.
+Deletes the patient at the specified index within the patient list.
 
 Format: `delete INDEX`
+
+Example input: delete 1
+
+Expected output on success: “Successfully deleted patient NAME’s data”
+
+Expected output on failure:
+If the specified index is out of bounds: “The patient index provided is invalid”
 
 * Deletes the patient at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd patient in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st patient in the results of the `find` command.
+### Deleting a specific patient using name and phone number : `delete-p`
 
-### Clearing all entries : `clear`
+Deletes the patient with the specified name and phone number within the patient list.
 
-Clears all entries from the address book.
+Format: `delete-p n/NAME p/PHONE_NUMBER`
 
-Format: `clear`
+Acceptable inputs: Refer to the respective rules under the 'add' command
+
+Example input: delete n/Eugene Hirose p/90807561
+
+Expected output on success: “Successfully deleted patient NAME’s data”
+
+Expected output on failure:
+* If the patient name or phone number does not match: “There is no patient with name NAME and phone number PHONE_NUMBER”
+* If missing/invalid input in any of the required fields: “Invalid input format”
+
+
+### Deleting all entries : `delete-all`
+
+Lets the system know the user wants to delete all entries from the patient list.
+
+Format: `delete-all`
+
+Expected output: “Are you sure you want to delete all? This action is irreversible. If so, enter ‘yes’. If not, simply enter 'no'.” 
+* Subsequent input option 1: "yes"
+  * Expected output: Shows empty list of patients 
+* Subsequent input option 2: "no"
+  * Expected output: Shows no change to the list 
+* Subsequent input option 3: any input other than "yes" or "no" 
+  * Expected output: “Please give either 'yes' or 'no' after 'delete-all' command!”
+
+### Forcefully deleting all entries : `delete-all-f`
+
+Forcefully deletes all entries from the patient list.
+
+Format: `delete-all-f`
+
+Expected output: Shows empty list of patients
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Lets the system know the user wants to exit the program.
 
 Format: `exit`
 
-### Saving the data
+Expected output: “Would you like to exit the application? Enter ‘yes’ or ‘no’.”
+* Subsequent input option 1: "yes"
+    * Expected output: Closes the application
+* Subsequent input option 2: "no"
+    * Expected output: None
+* Subsequent input option 3: any input other than "yes" or "no"
+    * Expected output: "Please give either 'yes' or 'no' after 'exit' command!"
 
-AddressBook data are saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
+### Forcefully exiting the program : `exit-f`
+
+Forcefully exits the program.
+
+Format: `exit-f`
+
+Expected output: The application gets closed
 
 ### Editing the data file
 
@@ -195,10 +243,14 @@ _Details coming soon ..._
 
 Action     | Format, Examples
 -----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------
-**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-**Clear**  | `clear`
-**Delete** | `delete INDEX`<br> e.g., `delete 3`
+**Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​` <br> e.g., `add n/Jaeho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
+**Delete by index** | `delete INDEX`<br> e.g., `delete 3`
+**Delete by name and phone** | `delete-p n/NAME p/PHONE_NUMBER`<br> e.g. `delete-p n/Jaeho p/22224444`
+**Delete all**  | `delete-all`
+**Force delete all** | `delete-all-f`
 **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`
 **List**   | `list`
 **Help**   | `help`
+**Exit**   | `exit`
+**Force exit** | `exit-f`
