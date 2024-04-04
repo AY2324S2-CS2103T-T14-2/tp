@@ -18,7 +18,7 @@ import seedu.address.logic.commands.DeleteByIndexCommand;
  */
 public class DeleteByIndexCommandParserTest {
 
-    private DeleteCommandParser parser = new DeleteCommandParser();
+    private DeleteByIndexCommandParser parser = new DeleteByIndexCommandParser();
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
