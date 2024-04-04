@@ -30,11 +30,24 @@ public class DeleteByNamePhoneNumberCommand extends Command {
     private final Name name;
     private final Phone phone;
 
+    /**
+     * Constructor for DeleteByNamePhoneNumberCommand.
+     *
+     * @param name Name of the patient to be deleted.
+     * @param phone Phone number of the patient to be deleted.
+     */
     public DeleteByNamePhoneNumberCommand(Name name, Phone phone) {
         this.name = name;
         this.phone = phone;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param model {@code Model} which the command should operate on.
+     * @return {@code CommandResult} of the command.
+     * @throws CommandException Exception thrown if the command fails.
+     */
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
