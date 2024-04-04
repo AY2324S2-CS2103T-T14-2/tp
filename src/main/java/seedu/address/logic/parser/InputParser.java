@@ -22,6 +22,9 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ForceDeleteAllCommand;
 import seedu.address.logic.commands.ForceExitCommand;
 import seedu.address.logic.commands.HelpCommand;
+import seedu.address.logic.commands.ListAlphabeticalCommand;
+import seedu.address.logic.commands.ListByApptDateCommand;
+import seedu.address.logic.commands.ListByDateCriteriaCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoCommand;
 import seedu.address.logic.commands.YesCommand;
@@ -127,6 +130,9 @@ public class InputParser {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
+        case ListAlphabeticalCommand.COMMAND_WORD:
+            return new ListAlphabeticalCommand();
+
         case ExitCommand.COMMAND_WORD:
             isPreviousCommandExit = true;
             return new ExitCommand();
@@ -136,6 +142,12 @@ public class InputParser {
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
+
+        case ListByApptDateCommand.COMMAND_WORD:
+            return new ListByApptDateCommand();
+
+        case ListByDateCriteriaCommand.COMMAND_WORD:
+            return new ListByDateCriteriaCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
