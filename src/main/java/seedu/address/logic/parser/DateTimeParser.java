@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
- * Parses date time input arguments adn creates a LocalDate object
+ * Parses date time input arguments and creates a LocalDate object
  */
 public class DateTimeParser {
     public static final DateTimeFormatter INPUTFORMAT1 = DateTimeFormatter.ofPattern("d/M/yyyy");
