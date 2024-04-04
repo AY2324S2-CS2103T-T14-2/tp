@@ -35,7 +35,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         String[] splitMessages = args.trim().split(" ");
         Boolean hasName = false;
         if (splitMessages[0].length() >= 2) {
-            hasName = splitMessages[0].substring(0,2).equals("n/");
+            hasName = splitMessages[0].substring(0, 2).equals("n/");
         }
 
         if (hasName) {
