@@ -73,29 +73,29 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasPatient_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> modelManager.hasPatient(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPatient_patientNotInAddressBook_returnsFalse() {
         assertFalse(modelManager.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPatient_patientInAddressBook_returnsTrue() {
         modelManager.addPatient(ALICE);
         assertTrue(modelManager.hasPatient(ALICE));
     }
 
     @Test
-    public void getFilteredPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getFilteredPatientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPatientList().remove(0));
     }
 
     @Test
     public void equals() {
-        PatientList patientList = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
+        PatientList patientList = new AddressBookBuilder().withPatient(ALICE).withPatient(BENSON).build();
         PatientList differentPatientList = new PatientList();
         UserPrefs userPrefs = new UserPrefs();
 
