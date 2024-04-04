@@ -16,6 +16,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ForceDeleteAllCommand;
+import seedu.address.logic.commands.ForceExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoCommand;
@@ -28,6 +29,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 public class InputParser {
     private static final String DELETE_ALL_ERROR_MESSAGE =
             "Please give either 'yes' or 'no' after 'delete-all' command!";
+    private static final String EXIT_ERROR_MESSAGE = "Please give either 'yes' or 'no' after 'exit' command!";
 
     /**
      * Used for initial separation of command word and args.
@@ -36,7 +38,7 @@ public class InputParser {
     private static final Logger logger = LogsCenter.getLogger(InputParser.class);
 
     private boolean isPreviousCommandDeleteAll = false; // To check if the previous command was "delete-all"
-
+    private boolean isPreviousCommandExit = false; // To check if the previous command was "exit"
 
     /**
      * Parses user input into command for execution.
@@ -64,11 +66,24 @@ public class InputParser {
             isPreviousCommandDeleteAll = false;
 
             if (userInput.equals("yes")) {
-                return new YesCommand();
+                return new YesCommand("delete-all");
             } else if (userInput.equals("no")) {
                 return new NoCommand();
             } else {
                 throw new ParseException(DELETE_ALL_ERROR_MESSAGE);
+            }
+        }
+
+        // Checking if the previous command was "exit"
+        if (isPreviousCommandExit) {
+            isPreviousCommandExit = false;
+
+            if (userInput.equals("yes")) {
+                return new YesCommand("exit");
+            } else if (userInput.equals("no")) {
+                return new NoCommand();
+            } else {
+                throw new ParseException(EXIT_ERROR_MESSAGE);
             }
         }
 
@@ -97,7 +112,11 @@ public class InputParser {
             return new ListCommand();
 
         case ExitCommand.COMMAND_WORD:
+            isPreviousCommandExit = true;
             return new ExitCommand();
+
+        case ForceExitCommand.COMMAND_WORD:
+            return new ForceExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();

@@ -10,7 +10,21 @@ import seedu.address.model.PatientList;
  */
 public class YesCommand extends Command {
     public static final String COMMAND_WORD = "yes";
-    public static final String MESSAGE_SUCCESS = "Successfully deleted all data";
+    public static final String DELETE_MESSAGE_SUCCESS = "Successfully deleted all data";
+    public static final String EXIT_MESSAGE_SUCCESS = "Successfully exited the application";
+
+
+    private String previousCommand;
+
+    /**
+     * Constructor for YesCommand.
+     *
+     * @param previousCommand The previous command that was executed.
+     */
+    public YesCommand(String previousCommand) {
+        super();
+        this.previousCommand = previousCommand;
+    }
 
     /**
      * Executes the command and returns the result message.
@@ -22,7 +36,14 @@ public class YesCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        model.setPatientList(new PatientList());
-        return new CommandResult(MESSAGE_SUCCESS);
+        if (this.previousCommand.equals("delete-all")) {
+            model.setPatientList(new PatientList());
+
+            return new CommandResult(DELETE_MESSAGE_SUCCESS);
+        } else if (this.previousCommand.equals("exit")) {
+            return new CommandResult(EXIT_MESSAGE_SUCCESS, false, true);
+        } else {
+            return new CommandResult("");
+        }
     }
 }
