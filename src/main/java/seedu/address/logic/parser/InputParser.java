@@ -23,6 +23,7 @@ import seedu.address.logic.commands.ForceExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListByApptDateCommand;
 import seedu.address.logic.commands.ListByDateCriteriaCommand;
+import seedu.address.logic.commands.ListAlphabeticalCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.NoCommand;
 import seedu.address.logic.commands.YesCommand;
@@ -124,6 +125,9 @@ public class InputParser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+
+        case ListAlphabeticalCommand.COMMAND_WORD:
+            return new ListAlphabeticalCommand();
 
         case ExitCommand.COMMAND_WORD:
             isPreviousCommandExit = true;
