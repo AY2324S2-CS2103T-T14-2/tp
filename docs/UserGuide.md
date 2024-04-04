@@ -139,7 +139,7 @@ Examples:
 
 Edits an existing patient in the patient list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATEOFBIRTH] [s/SEX] [o/APPOINTMENT]`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATEOFBIRTH] [s/SEX] [o/APPOINTMENT]` or `edit n/NAME p/PHONE_NUMBER [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATEOFBIRTH] [s/SEX] [o/APPOINTMENT]`
 
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -148,6 +148,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATEOFBIRTH] [s/
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd patient to be `Betsy Crower`.
+*  `edit n/Alex Yeoh p/88472848 n/Eugene` Edits the name of patient from `Alex Yeoh` to `Eugene`. 
 
 ### Editing the latest visit of a patient: `editv`
 
