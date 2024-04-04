@@ -5,7 +5,9 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
 
 /**
  * The API of the Model component.
@@ -58,6 +60,11 @@ public interface Model {
     boolean hasPatient(Patient patient);
 
     /**
+     * Returns true if a patient with {@code name} and {@code phone} exists in the patient list.
+     */
+    boolean hasPatient(Name name, Phone phone);
+
+    /**
      * Deletes the given patient.
      * The patient must exist in the patient list.
      */
@@ -76,6 +83,11 @@ public interface Model {
      * another existing patient in the patient list.
      */
     void setPatient(Patient target, Patient editedPatient);
+
+    /**
+     * Returns the patient with {@code name} and {@code phone} in the patient list.
+     */
+    Patient getPatient(Name name, Phone phone);
 
     /** Returns an unmodifiable view of the filtered patient list */
     ObservableList<Patient> getFilteredPatientList();

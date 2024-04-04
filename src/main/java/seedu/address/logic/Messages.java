@@ -46,7 +46,9 @@ public class Messages {
                 .append("; Date Of birth: ")
                 .append(patient.getDateOfBirth())
                 .append("; Sex: ")
-                .append(patient.getSex());
+                .append(patient.getSex())
+                .append("; Appointment: ")
+                .append(patient.getAppointment());
         return builder.toString();
     }
 

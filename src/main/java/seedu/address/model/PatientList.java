@@ -3,11 +3,16 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.model.patient.Name;
 import seedu.address.model.patient.Patient;
+import seedu.address.model.patient.Phone;
 import seedu.address.model.patient.UniquePatientList;
+import seedu.address.model.patient.exceptions.PatientNotFoundException;
 
 /**
  * Wraps all data at the patient list level
@@ -68,6 +73,15 @@ public class PatientList implements ReadOnlyPatientList {
     }
 
     /**
+     * Returns true if a patient with {@code name} and {@code phone} exists in the list.
+     */
+    public boolean hasPatient(Name name, Phone phone) {
+        requireNonNull(name);
+        requireNonNull(phone);
+        return getPatientOptional(name, phone).isPresent();
+    }
+
+    /**
      * Adds a patient to the list.
      * The patient must not already exist in the list.
      */
@@ -94,6 +108,20 @@ public class PatientList implements ReadOnlyPatientList {
     public void removePatient(Patient key) {
         patients.remove(key);
     }
+
+    /**
+     * Returns a {@code Patient} in the patient list that matches the given {@code name} and {@code phone}.
+     */
+    public Patient getPatient(Name name, Phone phone) {
+        Optional<Patient> patient = getPatientOptional(name, phone);
+        if (patient.isPresent()) {
+            return patient.get();
+        } else {
+            throw new PatientNotFoundException();
+        }
+    }
+
+
 
     //// util methods
 
@@ -127,5 +155,10 @@ public class PatientList implements ReadOnlyPatientList {
     @Override
     public int hashCode() {
         return patients.hashCode();
+    }
+
+    private Optional<Patient> getPatientOptional(Name name, Phone phone) {
+        Predicate<Patient> predicate = patient -> patient.getName().equals(name) && patient.getPhone().equals(phone);
+        return getPatientList().stream().filter(predicate).findFirst();
     }
 }
