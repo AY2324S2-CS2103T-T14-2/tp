@@ -72,12 +72,17 @@ Format: `help`
 
 ### Adding a patient: `add`
 
-Adds a patient to the list.
+Adds a patient to the patient list.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH s/SEX`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH s/Sex`
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/25/2/2024 s/Male`
+<box type="info" seamless>
+
+**Note:** Appointment field can only be edited after adding the patient into the patient list
+</box>
+
+Example:
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2001-1-1 s/Male`
 
 ### Adding a visit to a patient: `addv`
 
@@ -95,26 +100,23 @@ Examples:
 
 ### Listing all patients : `list`
 
-Shows a list of all patients in the address book.
+Shows a list of all patients in the patient list.
 
 Format: `list`
 
 ### Editing a patient : `edit`
 
-Edits an existing patient in the address book.
+Edits an existing patient in the patient list.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATEOFBIRTH] [s/SEX] [o/APPOINTMENT]`
 
 * Edits the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the patient will be removed i.e adding of tags is not cumulative.
-* You can remove all the patient’s tags by typing `t/` without
-    specifying any tags after it.
 
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd patient to be `Betsy Crower` and clears all existing tags.
+*  `edit 2 n/Betsy Crower` Edits the name of the 2nd patient to be `Betsy Crower`.
 
 ### Editing the latest visit of a patient: `editv`
 

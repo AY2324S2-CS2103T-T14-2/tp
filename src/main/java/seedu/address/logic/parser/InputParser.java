@@ -13,6 +13,7 @@ import seedu.address.logic.commands.AddVisitCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteAllCommand;
 import seedu.address.logic.commands.DeleteByIndexCommand;
+import seedu.address.logic.commands.DeleteByNamePhoneNumberCommand;
 import seedu.address.logic.commands.DeleteVisitCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditVisitCommand;
@@ -105,11 +106,14 @@ public class InputParser {
             return new EditVisitCommandParser().parse(arguments);
 
         case DeleteByIndexCommand.COMMAND_WORD:
-            return new DeleteCommandParser().parse(arguments);
+            return new DeleteByIndexCommandParser().parse(arguments);
 
         case DeleteAllCommand.COMMAND_WORD:
             isPreviousCommandDeleteAll = true;
             return new DeleteAllCommand();
+
+        case DeleteByNamePhoneNumberCommand.COMMAND_WORD:
+            return new DeleteByNamePhoneNumberCommandParser().parse(arguments);
 
         case DeleteVisitCommand.COMMAND_WORD:
             return new DeleteVisitCommandParser().parse(arguments);

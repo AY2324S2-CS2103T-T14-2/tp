@@ -42,12 +42,15 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code name} is invalid.
      */
-    public static Name parseName(String name) throws ParseException {
-        requireNonNull(name);
-        String trimmedName = name.trim();
+    public static Name parseName(String stringToParse) throws ParseException {
+        requireNonNull(stringToParse);
+
+        String trimmedName = stringToParse.trim();
+
         if (!Name.isValidName(trimmedName)) {
             throw new ParseException(Name.MESSAGE_CONSTRAINTS);
         }
+
         return new Name(trimmedName);
     }
 
@@ -57,12 +60,14 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code phone} is invalid.
      */
-    public static Phone parsePhone(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedPhone = phone.trim();
+    public static Phone parsePhone(String stringToParse) throws ParseException {
+        requireNonNull(stringToParse);
+        String trimmedPhone = stringToParse.trim();
+
         if (!Phone.isValidPhone(trimmedPhone)) {
             throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
         }
+
         return new Phone(trimmedPhone);
     }
 
