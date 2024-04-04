@@ -22,7 +22,7 @@ public class DeleteByIndexCommand extends Command {
             + ": Deletes the patient identified by the index number used in the displayed patient list.\n"
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1";
-    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Deleted Patient: %1$s";
+    public static final String MESSAGE_DELETE_PATIENT_SUCCESS = "Successfully deleted patient %1$s's data";
 
     private final Index targetIndex;
 
@@ -41,7 +41,7 @@ public class DeleteByIndexCommand extends Command {
 
         Patient patientToDelete = lastShownList.get(targetIndex.getZeroBased());
         model.deletePatient(patientToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, Messages.format(patientToDelete)));
+        return new CommandResult(String.format(MESSAGE_DELETE_PATIENT_SUCCESS, patientToDelete.getName()));
     }
 
     @Override
