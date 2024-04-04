@@ -114,6 +114,27 @@ Shows a list of all patients in the patient list.
 
 Format: `list`
 
+### Listing all patients in alphabetical order : `list-a`
+
+Shows a list of all patients in the address book in alphabetical order.
+
+Format: `list-a`
+
+### Listing all patients in order of appointment date : `list-by-date`
+
+Shows a list of all patients in the address book in order of appointment.
+
+Format: `list-by-date`
+
+### Listing all patients whose appointments fall or on before a certain date : `list-until-date`
+
+Shows a list of all patients in the address book whose appointments fall on or before the given date.
+
+Format: `list-until-date o/dd/mm/yyyy`
+
+Examples:
+* `list-until-date o/13/01/2024` Displays all patients with appointments on or before 13 January 2024.
+
 ### Editing a patient : `edit`
 
 Edits an existing patient in the patient list.
