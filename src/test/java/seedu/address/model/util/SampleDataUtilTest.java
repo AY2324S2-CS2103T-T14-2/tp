@@ -9,7 +9,7 @@ import seedu.address.model.patient.Patient;
 public class SampleDataUtilTest {
 
     @Test
-    public void getSamplePersons_returnsNonEmptyArray() {
+    public void getSamplePatients_returnsNonEmptyArray() {
         Patient[] patients = SampleDataUtil.getSamplePatients();
         assertTrue(patients.length != 0);
     }

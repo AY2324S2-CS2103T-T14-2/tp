@@ -28,27 +28,27 @@ import seedu.address.testutil.PatientBuilder;
 public class AddCommandTest {
 
     @Test
-    public void constructor_nullPerson_throwsNullPointerException() {
+    public void constructor_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new AddCommand(null));
     }
 
     @Test
-    public void execute_personAcceptedByModel_addSuccessful() throws Exception {
-        ModelStubAcceptingPersonAdded modelStub = new ModelStubAcceptingPersonAdded();
+    public void execute_patientAcceptedByModel_addSuccessful() throws Exception {
+        ModelStubAcceptingPatientAdded modelStub = new ModelStubAcceptingPatientAdded();
         Patient validPatient = new PatientBuilder().build();
 
         CommandResult commandResult = new AddCommand(validPatient).execute(modelStub);
 
         assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, Messages.format(validPatient)),
                 commandResult.getFeedbackToUser());
-        assertEquals(Arrays.asList(validPatient), modelStub.personsAdded);
+        assertEquals(Arrays.asList(validPatient), modelStub.patientsAdded);
     }
 
     @Test
-    public void execute_duplicatePerson_throwsCommandException() {
+    public void execute_duplicatePatient_throwsCommandException() {
         Patient validPatient = new PatientBuilder().build();
         AddCommand addCommand = new AddCommand(validPatient);
-        ModelStub modelStub = new ModelStubWithPerson(validPatient);
+        ModelStub modelStub = new ModelStubWithPatient(validPatient);
 
         assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_PATIENT, () -> addCommand.execute(modelStub));
     }
@@ -162,10 +162,10 @@ public class AddCommandTest {
     /**
      * A Model stub that contains a single patient.
      */
-    private class ModelStubWithPerson extends ModelStub {
+    private class ModelStubWithPatient extends ModelStub {
         private final Patient patient;
 
-        ModelStubWithPerson(Patient patient) {
+        ModelStubWithPatient(Patient patient) {
             requireNonNull(patient);
             this.patient = patient;
         }
@@ -180,19 +180,19 @@ public class AddCommandTest {
     /**
      * A Model stub that always accept the patient being added.
      */
-    private class ModelStubAcceptingPersonAdded extends ModelStub {
-        final ArrayList<Patient> personsAdded = new ArrayList<>();
+    private class ModelStubAcceptingPatientAdded extends ModelStub {
+        final ArrayList<Patient> patientsAdded = new ArrayList<>();
 
         @Override
         public boolean hasPatient(Patient patient) {
             requireNonNull(patient);
-            return personsAdded.stream().anyMatch(patient::isSamePatient);
+            return patientsAdded.stream().anyMatch(patient::isSamePatient);
         }
 
         @Override
         public void addPatient(Patient patient) {
             requireNonNull(patient);
-            personsAdded.add(patient);
+            patientsAdded.add(patient);
         }
 
         @Override

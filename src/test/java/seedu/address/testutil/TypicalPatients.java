@@ -84,13 +84,13 @@ public class TypicalPatients {
      */
     public static PatientList getTypicalAddressBook() {
         PatientList ab = new PatientList();
-        for (Patient patient : getTypicalPersons()) {
+        for (Patient patient : getTypicalPatients()) {
             ab.addPatient(patient);
         }
         return ab;
     }
 
-    public static List<Patient> getTypicalPersons() {
+    public static List<Patient> getTypicalPatients() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 }

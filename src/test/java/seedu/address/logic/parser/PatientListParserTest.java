@@ -6,7 +6,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PATIENT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -72,8 +72,8 @@ public class PatientListParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteByIndexCommand command = (DeleteByIndexCommand) parser.parseCommand(
-                DeleteByIndexCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased());
-        assertEquals(new DeleteByIndexCommand(INDEX_FIRST_PERSON), command);
+                DeleteByIndexCommand.COMMAND_WORD + " " + INDEX_FIRST_PATIENT.getOneBased());
+        assertEquals(new DeleteByIndexCommand(INDEX_FIRST_PATIENT), command);
     }
 
     @Test
@@ -81,8 +81,8 @@ public class PatientListParserTest {
         Patient patient = new PatientBuilder().build();
         EditPatientDescriptor descriptor = new EditPatientDescriptorBuilder(patient).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_PERSON.getOneBased() + " " + PatientUtil.getEditPersonDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_PERSON, descriptor), command);
+                + INDEX_FIRST_PATIENT.getOneBased() + " " + PatientUtil.getEditPatientDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(INDEX_FIRST_PATIENT, descriptor), command);
     }
 
     @Test

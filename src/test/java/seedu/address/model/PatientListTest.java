@@ -43,7 +43,7 @@ public class PatientListTest {
     }
 
     @Test
-    public void resetData_withDuplicatePersons_throwsDuplicatePersonException() {
+    public void resetData_withDuplicatePatients_throwsDuplicatePatientException() {
         // Two patients with the same identity fields
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
@@ -54,23 +54,23 @@ public class PatientListTest {
     }
 
     @Test
-    public void hasPerson_nullPerson_throwsNullPointerException() {
+    public void hasPatient_nullPatient_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> patientList.hasPatient(null));
     }
 
     @Test
-    public void hasPerson_personNotInAddressBook_returnsFalse() {
+    public void hasPatient_patientNotInAddressBook_returnsFalse() {
         assertFalse(patientList.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPerson_personInAddressBook_returnsTrue() {
+    public void hasPatient_patientInAddressBook_returnsTrue() {
         patientList.addPatient(ALICE);
         assertTrue(patientList.hasPatient(ALICE));
     }
 
     @Test
-    public void hasPerson_personWithSameIdentityFieldsInAddressBook_returnsTrue() {
+    public void hasPatient_patientWithSameIdentityFieldsInAddressBook_returnsTrue() {
         patientList.addPatient(ALICE);
         Patient editedAlice = new PatientBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .build();
@@ -78,7 +78,7 @@ public class PatientListTest {
     }
 
     @Test
-    public void getPersonList_modifyList_throwsUnsupportedOperationException() {
+    public void getPatientList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> patientList.getPatientList().remove(0));
     }
 

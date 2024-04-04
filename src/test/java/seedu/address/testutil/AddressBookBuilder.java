@@ -23,7 +23,7 @@ public class AddressBookBuilder {
     /**
      * Adds a new {@code Patient} to the {@code PatientList} that we are building.
      */
-    public AddressBookBuilder withPerson(Patient patient) {
+    public AddressBookBuilder withPatient(Patient patient) {
         patientList.addPatient(patient);
         return this;
     }
