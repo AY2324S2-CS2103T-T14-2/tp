@@ -33,12 +33,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
 
         String[] splitMessages = args.trim().split(" ");
-        Boolean hasName = false;
+        Boolean hasNamePrefix = false;
         if (splitMessages[0].length() >= 2) {
-            hasName = splitMessages[0].substring(0, 2).equals("n/");
+            hasNamePrefix = splitMessages[0].substring(0, 2).equals("n/");
         }
 
-        if (hasName) {
+        if (hasNamePrefix) {
             return parseStringWithNameAndPhone(splitMessages);
         } else {
             return parseStringWithIndex(args);
