@@ -13,6 +13,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -55,8 +56,11 @@ public class EditCommand extends Command {
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PATIENT = "This patient already exists in the list.";
 
-    private final Index index;
+    private Index index;
     private final EditPatientDescriptor editPatientDescriptor;
+    private Name name;
+    private Phone phone;
+    private final boolean useIndex;
 
     /**
      * @param index of the patient in the filtered patient list to edit
@@ -68,6 +72,23 @@ public class EditCommand extends Command {
 
         this.index = index;
         this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
+        useIndex = true;
+    }
+
+    /**
+     * @param name name of the patient in the filtered patient list to edit
+     * @param phone phone number of the patient in the filtered patient list to edit
+     * @param editPatientDescriptor details to edit the patient with
+     */
+    public EditCommand(Name name, Phone phone, EditPatientDescriptor editPatientDescriptor) {
+        requireNonNull(name);
+        requireNonNull(phone);
+        requireNonNull(editPatientDescriptor);
+
+        this.name = name;
+        this.phone = phone;
+        this.editPatientDescriptor = new EditPatientDescriptor(editPatientDescriptor);
+        useIndex = false;
     }
 
     @Override
@@ -75,11 +96,18 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Patient> lastShownList = model.getFilteredPatientList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (useIndex && index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PATIENT_DISPLAYED_INDEX);
         }
 
-        Patient patientToEdit = lastShownList.get(index.getZeroBased());
+        Patient patientToEdit = null;
+        if (useIndex) {
+            patientToEdit = lastShownList.get(index.getZeroBased());
+        } else {
+            Predicate<Patient> preodicate = patient -> patient.getName().equals(name)
+                    && patient.getPhone().equals(phone);
+            patientToEdit = lastShownList.stream().filter(preodicate).findFirst().get();
+        }
         Patient editedPatient = createEditedPatient(patientToEdit, editPatientDescriptor);
 
         if (!patientToEdit.isSamePatient(editedPatient) && model.hasPatient(editedPatient)) {
