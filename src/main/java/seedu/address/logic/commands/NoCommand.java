@@ -19,6 +19,6 @@ public class NoCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        return new CommandResult("You have chosen the no command, so there is no effective change made.");
+        return new CommandResult("");
     }
 }
