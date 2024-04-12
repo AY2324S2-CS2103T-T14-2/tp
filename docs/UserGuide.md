@@ -6,7 +6,13 @@
 
 # MediTrack User Guide
 
-MediTrack is a **desktop app for managing patient details, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediTrack can get your patient management tasks done faster than traditional GUI apps.
+## Introduction
+
+Welcome to the MediTrack User Guide, your comprehensive companion in navigating the MediTrack application. This guide is designed to empower users-healthcare professionals and receptionists-by providing in-depth knowledge and practical tips on utilizing MediTrack effectively for patient data management. The user guide is written in a way that is easy to comprehend to even those with no prior technical knowledge or experience with a similar task management application.
+
+MediTrack stands at the forefront of healthcare technology, offering an intuitive platform for recording and managing patient data. Our application is built with the dual purpose of enhancing patient care and streamlining administrative tasks, thereby facilitating a more efficient and productive healthcare environment. Using a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), MediTrack will allow for greater efficiency in typing commands to carry out all necessary functions in managing patient particulars.
+
+The purpose of this User Guide is multifaceted. Primarily, it serves as an educational tool, introducing you to the myriad features and functionalities of MediTrack. Whether you are a first-time user or looking to deepen your understanding of more advanced features, this guide is tailored to meet your needs. It provides step-by-step instructions, best practices, and troubleshooting advice to ensure that you can navigate the application with ease and confidence.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -58,11 +64,13 @@ MediTrack is a **desktop app for managing patient details, optimized for use via
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* For any parameters using date format, strictly need to follow "yyyy-M-d" and "d/M/yyyy"
+* For any parameters using date format, strictly need to follow "yyyy-M-d" and "d/M/yyyy".
 
-* Duplicate patients are not allowed (Patients are considered the same patients if they have the same name and phone number)
+* Duplicate patients are not allowed (Patients are considered the same patients if they have the same name and phone number).
 
 * Name should only consist of letters, or a single special character surrounded by letters, the special characters allowed being spaces, `\`,  `/` and `-`. For example, `s/o` is allowed, but `s / o` is not since `/` is between 2 spaces.
+
+* Phone can have from 3 to 8 digits.
 
 * Sex field only accepts specific "Male" and "Female" as an input (eg. "MALE" or "FEMALE" is not accepted).
 
