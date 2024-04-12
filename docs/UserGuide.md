@@ -68,7 +68,7 @@ The purpose of this User Guide is multifaceted. Primarily, it serves as an educa
 
 * Duplicate patients are not allowed (Patients are considered the same patients if they have the same name and phone number).
 
-* Name should only consist of letters, or a single special character between letters, the special characters allowed being \ / -.
+* Name should only consist of letters, or a single special character surrounded by letters, the special characters allowed being spaces, `\`,  `/` and `-`. For example, `s/o` is allowed, but `s / o` is not since `/` is between 2 spaces.
 
 * Phone can have from 3 to 8 digits.
 
@@ -334,4 +334,5 @@ Furthermore, certain edits can cause the MediTrack to behave in unexpected ways 
 | **Help**           | `help`                                                                                                                                                                                                                                                                           
 | **Exit**           | `exit`                                                                                                                                                                                                                                                                           
 | **Force exit**           | `exit-f`                                                                                                                                                                                                                                                                         |
+
 
