@@ -64,13 +64,15 @@ The purpose of this User Guide is multifaceted. Primarily, it serves as an educa
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* For any parameters using date format, strictly need to follow "yyyy-M-d" and "d/M/yyyy".
+* For any parameters using date format, strictly need to follow "yyyy-MM-dd" and "dd/MM/yyyy".
 
 * Duplicate patients are not allowed (Patients are considered the same patients if they have the same name and phone number).
 
 * Name should only consist of letters, or a single special character surrounded by letters, the special characters allowed being spaces, `\`,  `/` and `-`. For example, `s/o` is allowed, but `s / o` is not since `/` is between 2 spaces.
 
 * Phone can have from 3 to 8 digits.
+
+* There is no restriction in Date of Birth and Appointment. Appointment can be before Date of Birth.
 
 * Sex field only accepts specific "Male" and "Female" as an input (eg. "MALE" or "FEMALE" is not accepted).
 
