@@ -6,7 +6,13 @@
 
 # MediTrack User Guide
 
-MediTrack is a **desktop app for managing patient details, optimized for use via a  Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, MediTrack can get your patient management tasks done faster than traditional GUI apps.
+## Introduction
+
+Welcome to the MediTrack User Guide, your comprehensive companion in navigating the MediTrack application. This guide is designed to empower users-healthcare professionals and receptionists-by providing in-depth knowledge and practical tips on utilizing MediTrack effectively for patient data management. The user guide is written in a way that is easy to comprehend to even those with no prior technical knowledge or experience with a similar task management application.
+
+MediTrack stands at the forefront of healthcare technology, offering an intuitive platform for recording and managing patient data. Our application is built with the dual purpose of enhancing patient care and streamlining administrative tasks, thereby facilitating a more efficient and productive healthcare environment. Using a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI), MediTrack will allow for greater efficiency in typing commands to carry out all necessary functions in managing patient particulars.
+
+The purpose of this User Guide is multifaceted. Primarily, it serves as an educational tool, introducing you to the myriad features and functionalities of MediTrack. Whether you are a first-time user or looking to deepen your understanding of more advanced features, this guide is tailored to meet your needs. It provides step-by-step instructions, best practices, and troubleshooting advice to ensure that you can navigate the application with ease and confidence.
 
 <!-- * Table of Contents -->
 <page-nav-print />
@@ -58,11 +64,13 @@ MediTrack is a **desktop app for managing patient details, optimized for use via
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* For any parameters using date format, strictly need to follow "yyyy-M-d" and "d/M/yyyy"
+* For any parameters using date format, strictly need to follow "yyyy-M-d" and "d/M/yyyy".
 
-* Duplicate patients are not allowed (Patients are considered the same patients if they have the same name and phone number)
+* Duplicate patients are not allowed (Patients are considered the same patients if they have the same name and phone number).
 
-* Name should only consist of letters, or a single special character between letters, the special characters allowed being \ / -
+* Name should only consist of letters, or a single special character surrounded by letters, the special characters allowed being spaces, `\`,  `/` and `-`. For example, `s/o` is allowed, but `s / o` is not since `/` is between 2 spaces.
+
+* Phone can have from 3 to 8 digits.
 
 * Sex field only accepts specific "Male" and "Female" as an input (eg. "MALE" or "FEMALE" is not accepted).
 
@@ -104,7 +112,7 @@ Format: `addv INDEX d/DATE_OF_VISIT c/CONDITION v/SEVERITY` or `addv n/NAME p/PH
 * The new visit will be the one shown in the UI
 * The specified patient will move to the bottom of the patient list
 
-Examples:
+Example:
 * `addv 1 d/25/2/2024 c/Mild Fever v/Low`
 * `addv n/Alex Yeoh p/87438807 d/25/2/2024 c/High Fever v/High`
 
@@ -132,7 +140,7 @@ Shows a list of all patients in the address book whose appointments fall on or b
 
 Format: `list-until-date o/dd/mm/yyyy`
 
-Examples:
+Example:
 * `list-until-date o/13/01/2024` Displays all patients with appointments on or before 13 January 2024.
 
 ### Editing a patient : `edit`
@@ -145,7 +153,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [b/DATEOFBIRTH] [s/
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 
-Examples:
+Example:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd patient to be `Betsy Crower`.
 *  `edit n/Alex Yeoh p/88472848 n/Eugene` Edits the name of patient from `Alex Yeoh` to `Eugene`. 
@@ -161,7 +169,7 @@ Format: `editv INDEX [d/DATE_OF_VISIT] [c/CONDITION] [v/SEVERITY`] or `editv n/N
 * The edited visit will be the one shown in the UI
 * The specified patient will move to the bottom of the patient list
 
-Examples:
+Example:
 * `editv 1 d/25/2/2024` Edits the visit date of the 1st patient to `25/2/2024`
 * `editv n/Alex Yeoh p/87438807 c/Sore throat v/Low` Edits the condition and severity of `Alex Yeoh` with `87438807` to `Sore throat` and `Low`.
 
@@ -181,7 +189,7 @@ Format: `find [n/KEYWORDS] [p/PHONE_NUMBER]`
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 * Unlike keywords, only 1 phone number can be provided e.g. `p/98765432 97538642` is invalid.
 
-Examples:
+Example:
 * `find n/John` returns `john` and `John Doe`
 * `find n/John p/98765432` returns a patient with name `john` and phone number `98765432`
 * `find n/alex roy` returns `Alex Yeoh`, `Roy Balakrishnan`<br>
@@ -193,7 +201,8 @@ Deletes the patient at the specified index within the patient list.
 
 Format: `delete INDEX`
 
-Example input: delete 1
+Example: 
+* delete 1
 
 Expected output on success: “Successfully deleted patient NAME’s data”
 
@@ -212,7 +221,8 @@ Format: `delete-p n/NAME p/PHONE_NUMBER`
 
 Acceptable inputs: Refer to the respective rules under the 'add' command
 
-Example input: delete n/Eugene Hirose p/90807561
+Example: 
+* delete n/Eugene Hirose p/90807561
 
 Expected output on success: “Successfully deleted patient NAME’s data”
 
@@ -253,7 +263,7 @@ Format: `deletev INDEX` or `deletev n/NAME p/PHONE_NUMBER`
 * The new visit displayed will be the one added before the deleted visit, if there is one
 * The specified patient will move to the bottom of the patient list
 
-Examples:
+Example:
 * `deletev 1`
 * `deletev n/Alex Yeoh p/87438807`
 
@@ -305,7 +315,8 @@ Furthermore, certain edits can cause the MediTrack to behave in unexpected ways 
 
 ## Command summary
 
-| Action                                             | Format, Examples                                                                                                                                                                                                                                                                  |
+
+| Action                                             | Format, Example                                                                                                                                                                                                                                                                   |
 |----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add Patient**                                    | `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH s/SEX` <br> e.g., `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/25/2/2024 s/Male`                                                                                                   |
 | **Add Visit**                                      | `addv INDEX d/DATE_OF_VISIT c/CONDITION v/SEVERITY` or <br> `addv n/NAME p/PHONE_NUMBER d/DATE_OF_VISIT c/CONDITION v/SEVERITY` <br> e.g., `addv 1 d/25/2/2024 c/Mild Fever v/Low`                                                                                                |
@@ -324,4 +335,5 @@ Furthermore, certain edits can cause the MediTrack to behave in unexpected ways 
 | **Help**                                           | `help`                                                                                                                                                                                                                                                                            |
 | **Exit**                                           | `exit`                                                                                                                                                                                                                                                                            |
 | **Force exit**                                     | `exit-f`                                                                                                                                                                                                                                                                          |
+
 
