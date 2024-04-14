@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_PATIENTS_LISTED_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
+import static seedu.address.testutil.TypicalPatients.ALICE;
 import static seedu.address.testutil.TypicalPatients.CARL;
 import static seedu.address.testutil.TypicalPatients.ELLE;
 import static seedu.address.testutil.TypicalPatients.FIONA;
@@ -79,6 +80,37 @@ public class FindCommandTest {
         expectedModel.updateFilteredPatientList(namePredicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Arrays.asList(CARL, ELLE, FIONA), model.getFilteredPatientList());
+    }
+
+    @Test
+    public void execute_phoneNotFound_noPatientFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 0);
+        PhoneMatchesPredicate phoneMatchesPredicate = preparePhonePredicate("999");
+        FindCommand command = new FindCommand(PREDICATE_SHOW_ALL_PATIENTS, phoneMatchesPredicate);
+        expectedModel.updateFilteredPatientList(phoneMatchesPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.emptyList(), model.getFilteredPatientList());
+    }
+
+    @Test
+    public void execute_phonePredicate_onePatientFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 1);
+        PhoneMatchesPredicate phoneMatchesPredicate = preparePhonePredicate("94351253");
+        FindCommand command = new FindCommand(PREDICATE_SHOW_ALL_PATIENTS, phoneMatchesPredicate);
+        expectedModel.updateFilteredPatientList(phoneMatchesPredicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPatientList());
+    }
+
+    @Test
+    public void execute_nameAndPhonePredicate_onePatientFound() {
+        String expectedMessage = String.format(MESSAGE_PATIENTS_LISTED_OVERVIEW, 1);
+        NameContainsKeywordsPredicate namePredicate = prepareNamePredicate("Alice");
+        PhoneMatchesPredicate phoneMatchesPredicate = preparePhonePredicate("94351253");
+        FindCommand command = new FindCommand(namePredicate, phoneMatchesPredicate);
+        expectedModel.updateFilteredPatientList(namePredicate.and(phoneMatchesPredicate));
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE), model.getFilteredPatientList());
     }
 
     @Test
