@@ -207,17 +207,12 @@ Deletes the patient at the specified index within the patient list.
 
 Format: `delete INDEX`
 
-Example: 
-* `delete 1` 
-
-Expected output on success: “Successfully deleted patient NAME’s data”
-
-Expected output on failure:
-If the specified index is out of bounds: “The patient index provided is invalid”
-
 * Deletes the patient at the specified `INDEX`.
 * The index refers to the index number shown in the displayed patient list.
 * The index **must be a positive integer** 1, 2, 3, …​
+
+Example:
+* `delete 1` would return “Successfully deleted patient NAME’s data” for the patient at index 1.
 
 ### Deleting a specific patient using name and phone number : `delete-p`
 
@@ -225,17 +220,10 @@ Deletes the patient with the specified name and phone number within the patient 
 
 Format: `delete-p n/NAME p/PHONE_NUMBER`
 
-Acceptable inputs: Refer to the respective rules under the 'add' command
+* Refer to the respective rules under the 'add' command for acceptable inputs to 'delete-p' command.
 
 Example: 
-* `delete n/Eugene Hirose p/90807561`
-
-Expected output on success: “Successfully deleted patient NAME’s data”
-
-Expected output on failure:
-* If the patient name or phone number does not match: “There is no patient with the specified name and phone number”
-* If missing/invalid input in any of the required fields: Lets the user know the correct command format and example
-
+* `delete n/Eugene Hirose p/90807561` would return “Successfully deleted patient Eugene Hirose’s data”.
 
 ### Deleting all entries : `delete-all`
 
@@ -243,13 +231,9 @@ Lets the system know the user wants to delete all entries from the patient list.
 
 Format: `delete-all`
 
-Expected output: “Are you sure you want to delete all? This action is irreversible. If so, enter ‘yes’. If not, simply enter 'no'.” 
-* Subsequent input option 1: "yes"
-  * Expected output: Shows empty list of patients 
-* Subsequent input option 2: "no"
-  * Expected output: Shows no change to the list 
-* Subsequent input option 3: any input other than "yes" or "no" 
-  * Expected output: “Please give either 'yes' or 'no' after 'delete-all' command!”
+Example:
+* 'delete-all' followed by 'yes' would remove all entries and show an empty list of patients.
+* 'delete-all' followed by 'no' would not cause any changes to the patient list.
 
 ### Forcefully deleting all entries : `delete-all-f`
 
@@ -257,7 +241,8 @@ Forcefully deletes all entries from the patient list.
 
 Format: `delete-all-f`
 
-Expected output: Shows empty list of patients
+Example:
+* `delete-all-f` would remove all entries and show an empty list of patients.
 
 ### Deleting the latest visit of a patient: `deletev`
 
@@ -281,13 +266,9 @@ Lets the system know the user wants to exit the program.
 
 Format: `exit`
 
-Expected output: “Would you like to exit the application? Enter ‘yes’ or ‘no’.”
-* Subsequent input option 1: "yes"
-    * Expected output: Closes the application
-* Subsequent input option 2: "no"
-    * Expected output: None
-* Subsequent input option 3: any input other than "yes" or "no"
-    * Expected output: "Please give either 'yes' or 'no' after 'exit' command!"
+Example:
+* 'exit' followed by 'yes' would exit the application.
+* 'exit' followed by 'no' would cause no changes to the application and cancel exit command.
 
 ### Forcefully exiting the program : `exit-f`
 
@@ -295,7 +276,8 @@ Forcefully exits the program.
 
 Format: `exit-f`
 
-Expected output: The application gets closed
+Example:
+* 'exit-f' would exit the application.
 
 ### Editing the data file
 
