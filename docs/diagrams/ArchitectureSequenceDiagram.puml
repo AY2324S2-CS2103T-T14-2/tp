@@ -20,7 +20,8 @@ activate model MODEL_COLOR
 model -[MODEL_COLOR]-> logic
 deactivate model
 
-logic -[LOGIC_COLOR]> storage : savePatientList(patientlist)
+logic -[LOGIC_COLOR]> storage : savePatientList(patientList)
+
 activate storage STORAGE_COLOR
 
 storage -[STORAGE_COLOR]> storage : Save to file

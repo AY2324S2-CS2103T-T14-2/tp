@@ -15,7 +15,7 @@ Class "<<interface>>\nStorage" as Storage
 Class StorageManager
 
 package "PatientList Storage" #F4F6F6{
-Class "<<interface>>\nPatientListStorage" as PatientlistStorage
+Class "<<interface>>\nPatientListStorage" as PatientListStorage
 Class JsonPatientListStorage
 Class JsonSerializablePatientList
 Class JsonAdaptedPatient
@@ -29,13 +29,15 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
-StorageManager -up-> "1" PatientlistStorage
+
+StorageManager -up-> "1" PatientListStorage
 
 Storage -left-|> UserPrefsStorage
-Storage -right-|> PatientlistStorage
+Storage -right-|> PatientListStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
-JsonPatientListStorage .up.|> PatientlistStorage
+JsonPatientListStorage .up.|> PatientListStorage
+
 JsonPatientListStorage ..> JsonSerializablePatientList
 JsonSerializablePatientList --> "*" JsonAdaptedPatient
 JsonAdaptedPatient --> "*" JsonAdaptedVisit

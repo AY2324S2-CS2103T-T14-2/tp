@@ -233,8 +233,8 @@ Example:
 Expected output on success: “Successfully deleted patient NAME’s data”
 
 Expected output on failure:
-* If the patient name or phone number does not match: “There is no patient with name NAME and phone number PHONE_NUMBER”
-* If missing/invalid input in any of the required fields: “Invalid input format”
+* If the patient name or phone number does not match: “There is no patient with the specified name and phone number”
+* If missing/invalid input in any of the required fields: Lets the user know the correct command format and example
 
 
 ### Deleting all entries : `delete-all`

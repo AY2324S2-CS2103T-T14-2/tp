@@ -22,6 +22,8 @@ Class DateOfBirth
 Class Sex
 Class Appointment
 Class UniqueVisitList
+Class SexOption
+
 
 Class I #FFFFFF
 }
@@ -47,7 +49,9 @@ Patient *--> Address
 Patient *--> DateOfBirth
 Patient *--> Sex
 Patient *--> Appointment
+
 Patient *-right-> "1"UniqueVisitList
+Sex *--> SexOption
 
 Patient -[hidden]up--> I
 UniquePatientList -[hidden]right-> I
