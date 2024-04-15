@@ -9,6 +9,8 @@
 <!-- * Table of Contents -->
 <page-nav-print />
 
+<div style="page-break-after: always;"></div>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Acknowledgements**
@@ -68,6 +70,8 @@ For example, the `Logic` component defines its API in the `Logic.java` interface
 
 The sections below give more details of each component.
 
+<div style="page-break-after: always;"></div>
+
 ### UI component
 
 The **API** of this component is specified in [`Ui.java`](https://github.com/AY2324S2-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
@@ -84,6 +88,8 @@ The `UI` component,
 * listens for changes to `Model` data so that the UI can be updated with the modified data.
 * keeps a reference to the `Logic` component, because the `UI` relies on the `Logic` to execute commands.
 * depends on some classes in the `Model` component, as it displays `Patient` object residing in the `Model`.
+
+<div style="page-break-after: always;"></div>
 
 ### Logic component
 
@@ -118,6 +124,8 @@ How the parsing works:
 * When called upon to parse a user command, the `InputParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InputParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteByIndexCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
+<div style="page-break-after: always;"></div>
+
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
@@ -136,6 +144,8 @@ The `Model` component,
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
 * does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
+<div style="page-break-after: always;"></div>
+
 ### Storage component
 
 **API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
@@ -150,6 +160,8 @@ The `Storage` component,
 ### Common classes
 
 Classes used by multiple components are in the `seedu.address.commons` package.
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -256,6 +268,8 @@ user truly wants to delete all entries when the 'delete-all' command is given.
 If the user wishes to bypass the safety check and is certain of the intent to delete all entries, the user can enter 
 'delete-all-f' command to forcefully delete all entries.
 
+<div style="page-break-after: always;"></div>
+
 ### Visit feature
 
 #### Implementation
@@ -280,6 +294,8 @@ The initial design was to have the 3 `Visit` fields be part of the `Patient` obj
 * [Logging guide](Logging.md)
 * [Configuration guide](Configuration.md)
 * [DevOps guide](DevOps.md)
+
+<div style="page-break-after: always;"></div>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -316,6 +332,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | receptionist | delete all patients              | easily reset the list to a blank state                                   |
 | `* *`    | receptionist | exit  with a command             | close the application with keyboard inputs only                          |
 
+
+<div style="page-break-after: always;"></div>
 
 ### Use cases
 
