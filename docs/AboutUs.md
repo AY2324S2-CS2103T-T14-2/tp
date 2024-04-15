@@ -36,7 +36,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jeong-jaeho.png" width="200px">  
 
 [[github](http://github.com/jeong-jaeho)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Team lead + Integration + Storage
@@ -46,7 +45,6 @@ You can reach us at the email `seer[at]comp.nus.edu.sg`
 <img src="images/jskimdev.png" width="200px">
 
 [[github](https://github.com/jskimdev)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Developer
 * Responsibilities: Code Quality + Model + JavaFX visuals
