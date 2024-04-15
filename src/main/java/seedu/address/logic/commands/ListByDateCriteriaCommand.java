@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE_OF_VISIT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PATIENTS;
 
 import java.util.ArrayList;
@@ -24,9 +24,9 @@ public class ListByDateCriteriaCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds all patients with appointment date on or before date "
             + "Parameters: "
-            + "[" + PREFIX_DATE_OF_VISIT + "DATEOFVISIT] "
+            + "[" + PREFIX_APPOINTMENT + "DATEOFAPPOINTMENT] "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_DATE_OF_VISIT + "25/2/2024";
+            + PREFIX_APPOINTMENT + "25/2/2024";
 
     private final ApptDateMatchesPredicate apptDatePredicate;
 
