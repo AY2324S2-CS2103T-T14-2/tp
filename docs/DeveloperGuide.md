@@ -212,7 +212,7 @@ Upon the user's entering the `list` command, after checking that the list of pat
 
 The following sequence diagram shows the sequence of events when the `list` command is typed by a user.
 
-<puml src="diagrams/ListSequenceDiagram.puml" alt="ListSequenceDiagram" />
+<puml src="diagrams/ListAlphabeticalSequenceDiagram.puml" alt="ListAlphabeticalSequenceDiagram" />
 
 #### Design considerations
 
