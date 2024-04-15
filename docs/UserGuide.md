@@ -239,6 +239,8 @@ Deletes the patient at the specified index within the patient list.
 Format: `delete INDEX`
 
 * Deletes the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
+* If the specified index goes over the number of indices available in the patient list, the program will return an error
+  message that states that the patient index provided is invalid.
 
 Example:
 * `delete 1` Deletes the first patient in the displayed list.
@@ -250,6 +252,7 @@ Deletes the patient with the specified name and phone number within the patient 
 Format: `delete-p n/NAME p/PHONE_NUMBER`
 
 * Refer to the respective rules under the 'add' command for acceptable inputs to 'delete-p' command.
+* If at least one of the name and phone number doesn't match, it will return an error message that states that there is no patient with the specified name and phone number.
 
 Example: 
 * `delete n/Eugene Hirose p/90807561` Deletes the patient with name exactly the same as "Eugene Hirose" and phone number exactly the same as "90807561".
@@ -263,6 +266,7 @@ Format: `delete-all`
 Example:
 * 'delete-all' followed by 'yes' Deletes all patients' information in the patientlist.json and displays an empty list.
 * 'delete-all' followed by 'no' Causes no changes to the patient list.
+* 'delete-all' followed by any other commands other than 'yes' and 'no' returns an error message that prompts the user to give either 'yes' or 'no' instead after 'delete-all' command.
 
 ### Forcefully deleting all entries : `delete-all-f`
 
