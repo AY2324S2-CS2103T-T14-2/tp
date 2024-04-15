@@ -1,0 +1,47 @@
+@startuml
+!include style.puml
+skinparam ArrowFontStyle plain
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":InputParser" as InputParser LOGIC_COLOR
+participant "f:ListAlphabeticalCommand" as ListAlphabeticalCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("list-a")
+activate LogicManager
+
+LogicManager -> InputParser : parseCommand("list-a")
+activate InputParser
+
+create ListAlphabeticalCommand
+InputParser -> ListAlphabeticalCommand
+activate ListAlphabeticalCommand
+
+ListAlphabeticalCommand -> Model : updateFilteredPatientList
+
+Model -> ListAlphabeticalCommand : (patient1, patient2)
+ListAlphabeticalCommand --> Model
+Model --> ListAlphabeticalCommand
+ListAlphabeticalCommand -> Model: deletePatient
+Model --> ListAlphabeticalCommand
+ListAlphabeticalCommand -> Model: addPatient
+Model --> ListAlphabeticalCommand
+
+ListAlphabeticalCommand -> CommandResult: CommandResult(MESSAGE_SUCCESS)
+
+CommandResult --> ListAlphabeticalCommand
+deactivate CommandResult
+
+ListAlphabeticalCommand --> LogicManager : r
+deactivate ListAlphabeticalCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml
+
