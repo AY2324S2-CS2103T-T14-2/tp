@@ -125,7 +125,7 @@ How the parsing works:
 
 <box type="info" seamless>
 
-**Note:** The diagram omits details of `UniqueVisitList` as that will be shown in [**Visit feature**](#implementation-4).
+**Note:** The diagram omits details of `UniqueVisitList` as that will be shown in [**Visit feature**](#visit-feature).
 
 </box>
 
@@ -200,7 +200,7 @@ to a less flexible feature.
 
 #### Planned enhancements
 
-In later iterations, we plan to add appointment and the 3 visit fields as optional conditions. The implementation will be identical to the above, as we can exploit the chaining of multiple `Predicate` objects in Java.
+In later iterations, we plan to add appointment date and the 3 visit fields as optional conditions. The implementation will be identical to the above, as we can exploit the chaining of multiple `Predicate` objects in Java.
 
 More complex enhancements can be made using the `Flag` subclass of `Prefix`, which is integrated into `ArgumentMultimap` as a zero-argument `Prefix`. This allows us to reuse the same command word `find`, but implement a different set of behaviour that is triggered when one or more optional `Flag` is detected. For example,  the command `find-d n/Bob` could be implemented to find and delete all patients with the keyword `Bob` in their name.
 
