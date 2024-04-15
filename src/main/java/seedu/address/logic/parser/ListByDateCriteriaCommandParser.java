@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENT;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 import seedu.address.logic.commands.ListByDateCriteriaCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -20,6 +21,11 @@ public class ListByDateCriteriaCommandParser implements Parser<ListByDateCriteri
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_APPOINTMENT);
 
         if (!argMultimap.getPreamble().equals("")) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    ListByDateCriteriaCommand.MESSAGE_USAGE));
+        }
+
+        if (Optional.empty().equals(argMultimap.getValue(PREFIX_APPOINTMENT))) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     ListByDateCriteriaCommand.MESSAGE_USAGE));
         }
