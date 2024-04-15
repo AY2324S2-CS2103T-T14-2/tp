@@ -46,40 +46,37 @@ public class EditCommandParser implements Parser<EditCommand> {
     }
 
     private EditCommand parseStringWithNameAndPhone(String[] splitMessages) throws ParseException {
-        try {
-            String namePrefix = splitMessages[0].substring(2) + " ";
-            String phonePrefix = "";
-            String rest = " ";
-            Boolean isNameFilled = false;
-            Boolean isPhoneFilled = false;
+        String namePrefix = splitMessages[0].substring(2) + " ";
+        String phonePrefix = "";
+        String rest = " ";
+        Boolean isNameFilled = false;
+        Boolean isPhoneFilled = false;
 
-            for (int i = 1; i < splitMessages.length; i++) {
-                if (!isNameFilled && splitMessages[i].substring(0, 2).equals("p/") && !isPhoneFilled) {
-                    isNameFilled = true;
-                    phonePrefix = splitMessages[i].substring(2);
-                    isPhoneFilled = true;
-                } else if (!isNameFilled && !splitMessages[i].substring(0, 2).equals("p/")) {
-                    namePrefix += splitMessages[i] + " ";
-                } else {
-                    rest += splitMessages[i] + " ";
-                }
+        for (int i = 1; i < splitMessages.length; i++) {
+            if (!isNameFilled && splitMessages[i].substring(0, 2).equals("p/") && !isPhoneFilled) {
+                isNameFilled = true;
+                phonePrefix = splitMessages[i].substring(2);
+                isPhoneFilled = true;
+            } else if (!isNameFilled && !splitMessages[i].substring(0, 2).equals("p/")) {
+                namePrefix += splitMessages[i] + " ";
+            } else {
+                rest += splitMessages[i] + " ";
             }
-
-            ArgumentMultimap argMultimap =
-                    ArgumentTokenizer.tokenize(rest, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                            PREFIX_DATEOFBIRTH, PREFIX_SEX, PREFIX_APPOINTMENT);
-
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                    PREFIX_DATEOFBIRTH, PREFIX_SEX, PREFIX_APPOINTMENT);
-
-            EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
-
-            setEditPatientDescriptor(editPatientDescriptor, argMultimap);
-
-            return new EditCommand(new Name(namePrefix.trim()), new Phone(phonePrefix.trim()), editPatientDescriptor);
-        } catch (Exception e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
+        ArgumentMultimap argMultimap =
+                ArgumentTokenizer.tokenize(rest, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                        PREFIX_DATEOFBIRTH, PREFIX_SEX, PREFIX_APPOINTMENT);
+
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
+                PREFIX_DATEOFBIRTH, PREFIX_SEX, PREFIX_APPOINTMENT);
+
+        EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
+
+        setEditPatientDescriptor(editPatientDescriptor, argMultimap);
+
+        return new EditCommand(new Name(namePrefix.trim()), new Phone(phonePrefix.trim()), editPatientDescriptor);
+
     }
 
     private EditCommand parseStringWithIndex(String args) throws ParseException {

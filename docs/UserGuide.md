@@ -14,6 +14,9 @@ MediTrack stands at the forefront of healthcare technology, offering an intuitiv
 
 The purpose of this User Guide is multifaceted. Primarily, it serves as an educational tool, introducing you to the myriad features and functionalities of MediTrack. Whether you are a first-time user or looking to deepen your understanding of more advanced features, this guide is tailored to meet your needs. It provides step-by-step instructions, best practices, and troubleshooting advice to ensure that you can navigate the application with ease and confidence.
 
+
+<div style="page-break-after: always;"></div>
+
 <!-- * Table of Contents -->
 <page-nav-print />
 
@@ -45,6 +48,8 @@ The purpose of this User Guide is multifaceted. Primarily, it serves as an educa
 1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -133,6 +138,9 @@ Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS b/DATE_OF_BIRTH s/Sex`
 Example:
 * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01 b/2001-1-1 s/Male`
 
+<div style="page-break-after: always;"></div>
+
+
 ### Adding a visit to a patient: `addv`
 
 Adds a visit to a patient.
@@ -169,6 +177,9 @@ Shows a list of all patients in the patient list in order of appointment.
 
 Format: `list-by-date`
 
+<div style="page-break-after: always;"></div>
+
+
 ### Listing all patients whose appointments fall or on before a certain date : `list-until-date`
 
 Shows a list of all patients in the patient list whose appointments fall on or before the given date.
@@ -192,6 +203,8 @@ Example:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st patient to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower` Edits the name of the 2nd patient to be `Betsy Crower`.
 *  `edit n/Alex Yeoh p/88472848 n/Eugene` Edits the name of patient from `Alex Yeoh` to `Eugene`. 
+
+<div style="page-break-after: always;"></div>
 
 ### Editing the latest visit of a patient: `editv`
 
@@ -257,6 +270,8 @@ Format: `delete-p n/NAME p/PHONE_NUMBER`
 Example: 
 * `delete n/Eugene Hirose p/90807561` Deletes the patient with name exactly the same as "Eugene Hirose" and phone number exactly the same as "90807561".
 
+<div style="page-break-after: always;"></div>
+
 ### Deleting all entries : `delete-all`
 
 Deletes all patients' information in the patientlist.json.
@@ -293,6 +308,8 @@ Example:
 * `deletev 1`
 * `deletev n/Alex Yeoh p/87438807`
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit`
 
 Lets the system know the user wants to exit the program.
@@ -322,6 +339,9 @@ MediTrack data are saved automatically as a JSON file `[JAR file location]/data/
 If your changes to the data file makes its format invalid, MediTrack will discard all data and start with an empty data file at the next run.  Hence, it is recommended to take a backup of the file before editing it.<br>
 Furthermore, certain edits can cause the MediTrack to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
 </box>
+
+<div style="page-break-after: always;"></div>
+
 
 ## FAQ
 
