@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":InputParser" as InputParser LOGIC_COLOR
 participant "f:ListCommand" as ListCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -16,21 +16,21 @@ end box
 [-> LogicManager : execute("list")
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand("list")
-activate AddressBookParser
+LogicManager -> InputParser : parseCommand("list")
+activate InputParser
 
 create ListCommand
-AddressBookParser -> ListCommand
+InputParser -> ListCommand
 activate ListCommand
 
-ListCommand -> Model : updateFilteredPersonList
+ListCommand -> Model : updateFilteredPatientList
 
 Model -> ListCommand : (patient1, patient2)
 ListCommand --> Model
 Model --> ListCommand
-ListCommand -> Model: deletePerson
+ListCommand -> Model: deletePatient
 Model --> ListCommand
-ListCommand -> Model: addPerson
+ListCommand -> Model: addPatient
 Model --> ListCommand
 
 ListCommand -> CommandResult: sortedList

@@ -4,7 +4,7 @@ skinparam ArrowFontStyle plain
 
 box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
-participant ":AddressBookParser" as AddressBookParser LOGIC_COLOR
+participant ":InputParser" as InputParser LOGIC_COLOR
 participant "f:ForceDeleteAllCommand" as ForceDeleteAllCommand LOGIC_COLOR
 end box
 
@@ -14,23 +14,23 @@ end box
 [-> LogicManager : execute(delete-all-f)
 activate LogicManager
 
-LogicManager -> AddressBookParser : parseCommand(delete-all-f)
-activate AddressBookParser
+LogicManager -> InputParser : parseCommand(delete-all-f)
+activate InputParser
 
 create ForceDeleteAllCommand
-AddressBookParser -> ForceDeleteAllCommand
+InputParser -> ForceDeleteAllCommand
 activate ForceDeleteAllCommand
 
-ForceDeleteAllCommand --> AddressBookParser
+ForceDeleteAllCommand --> InputParser
 deactivate ForceDeleteAllCommand
 
-AddressBookParser --> LogicManager : f
-deactivate AddressBookParser
+InputParser --> LogicManager : f
+deactivate InputParser
 
 LogicManager -> ForceDeleteAllCommand : execute()
 activate ForceDeleteAllCommand
 
-ForceDeleteAllCommand -> Model : setAddressBook()
+ForceDeleteAllCommand -> Model : setPatientList()
 activate Model
 
 Model --> ForceDeleteAllCommand

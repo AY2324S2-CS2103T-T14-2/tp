@@ -23,7 +23,7 @@ Class Sex
 Class Appointment
 Class UniqueVisitList
 Class SexOption
-Class Visit
+
 
 Class I #FFFFFF
 }
@@ -49,10 +49,9 @@ Patient *--> Address
 Patient *--> DateOfBirth
 Patient *--> Sex
 Patient *--> Appointment
-Patient *--> UniqueVisitList
 
+Patient *-right-> "1"UniqueVisitList
 Sex *--> SexOption
-UniqueVisitList --> "~* all" Visit
 
 Patient -[hidden]up--> I
 UniquePatientList -[hidden]right-> I
@@ -62,6 +61,9 @@ Phone -[hidden]right-> Email
 Email -[hidden]right-> Address
 Address -[hidden]right-> DateOfBirth
 DateOfBirth -[hidden]right-> Sex
+Sex -[hidden]right-> Appointment
+Appointment -[hidden]up-> UniqueVisitList
+
 
 ModelManager --> "~* filtered" Patient
 @enduml
