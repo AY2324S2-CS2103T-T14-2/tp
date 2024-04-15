@@ -157,19 +157,21 @@ Format: `list`
 
 ### Listing all patients in alphabetical order : `list-a`
 
-Shows a list of all patients in the address book in alphabetical order.
+Shows a list of all patients in the patient list in alphabetical order.
 
 Format: `list-a`
 
+**Note:** Currently, list-a can only support names where the first letters are in uppercase. Names that are in lowercase will not be listed in the correct order.
+
 ### Listing all patients in order of appointment date : `list-by-date`
 
-Shows a list of all patients in the address book in order of appointment.
+Shows a list of all patients in the patient list in order of appointment.
 
 Format: `list-by-date`
 
 ### Listing all patients whose appointments fall or on before a certain date : `list-until-date`
 
-Shows a list of all patients in the address book whose appointments fall on or before the given date.
+Shows a list of all patients in the patient list whose appointments fall on or before the given date.
 
 Format: `list-until-date o/dd/mm/yyyy`
 
