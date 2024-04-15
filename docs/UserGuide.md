@@ -212,7 +212,7 @@ Format: `delete INDEX`
 * The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `delete 1` would return “Successfully deleted patient NAME’s data” for the patient at index 1.
+* `delete 1` returns “Successfully deleted patient NAME’s data” for the patient at index 1.
 
 ### Deleting a specific patient using name and phone number : `delete-p`
 
@@ -223,7 +223,7 @@ Format: `delete-p n/NAME p/PHONE_NUMBER`
 * Refer to the respective rules under the 'add' command for acceptable inputs to 'delete-p' command.
 
 Example: 
-* `delete n/Eugene Hirose p/90807561` would return “Successfully deleted patient Eugene Hirose’s data”.
+* `delete n/Eugene Hirose p/90807561` returns “Successfully deleted patient Eugene Hirose’s data”.
 
 ### Deleting all entries : `delete-all`
 
@@ -232,8 +232,8 @@ Lets the system know the user wants to delete all entries from the patient list.
 Format: `delete-all`
 
 Example:
-* 'delete-all' followed by 'yes' would remove all entries and show an empty list of patients.
-* 'delete-all' followed by 'no' would not cause any changes to the patient list.
+* 'delete-all' followed by 'yes' removes all entries and show an empty list of patients.
+* 'delete-all' followed by 'no' does not cause any changes to the patient list.
 
 ### Forcefully deleting all entries : `delete-all-f`
 
@@ -242,7 +242,7 @@ Forcefully deletes all entries from the patient list.
 Format: `delete-all-f`
 
 Example:
-* `delete-all-f` would remove all entries and show an empty list of patients.
+* `delete-all-f` removes all entries and show an empty list of patients.
 
 ### Deleting the latest visit of a patient: `deletev`
 
@@ -267,8 +267,8 @@ Lets the system know the user wants to exit the program.
 Format: `exit`
 
 Example:
-* 'exit' followed by 'yes' would exit the application.
-* 'exit' followed by 'no' would cause no changes to the application and cancel exit command.
+* 'exit' followed by 'yes' exits the application.
+* 'exit' followed by 'no' causes no changes to the application and cancel exit command.
 
 ### Forcefully exiting the program : `exit-f`
 
@@ -277,7 +277,7 @@ Forcefully exits the program.
 Format: `exit-f`
 
 Example:
-* 'exit-f' would exit the application.
+* 'exit-f' exits the application.
 
 ### Editing the data file
 
