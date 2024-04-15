@@ -128,7 +128,7 @@ with(this){return _c('h3',{attrs:{"id":"deleting-a-patient-using-index-number-wi
 with(this){return _c('p',[_v("Format: "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("delete INDEX")])])}
 },function anonymous(
 ) {
-with(this){return _c('ul',[_c('li',[_v("Deletes the patient at the specified "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("INDEX")]),_v(". The index refers to the index number shown in the displayed patient list. The index "),_c('strong',[_v("must be a positive integer")]),_v(" 1, 2, 3, …​")])])}
+with(this){return _c('ul',[_c('li',[_v("Deletes the patient at the specified "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("INDEX")]),_v(". The index refers to the index number shown in the displayed patient list. The index "),_c('strong',[_v("must be a positive integer")]),_v(" 1, 2, 3, …​")]),_v(" "),_c('li',[_v("If the specified index goes over the number of indices available in the patient list, the program will return an error\nmessage that states that the patient index provided is invalid.")])])}
 },function anonymous(
 ) {
 with(this){return _c('ul',[_c('li',[_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("delete 1")]),_v(" Deletes the first patient in the displayed list.")])])}
@@ -140,7 +140,7 @@ with(this){return _c('h3',{attrs:{"id":"deleting-a-specific-patient-using-name-a
 with(this){return _c('p',[_v("Format: "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("delete-p n/NAME p/PHONE_NUMBER")])])}
 },function anonymous(
 ) {
-with(this){return _c('ul',[_c('li',[_v("Refer to the respective rules under the 'add' command for acceptable inputs to 'delete-p' command.")])])}
+with(this){return _c('ul',[_c('li',[_v("Refer to the respective rules under the 'add' command for acceptable inputs to 'delete-p' command.")]),_v(" "),_c('li',[_v("If at least one of the name and phone number doesn't match, it will return an error message that states that there is no patient with the specified name and phone number.")])])}
 },function anonymous(
 ) {
 with(this){return _c('ul',[_c('li',[_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("delete n/Eugene Hirose p/90807561")]),_v(" Deletes the patient with name exactly the same as \"Eugene Hirose\" and phone number exactly the same as \"90807561\".")])])}
@@ -152,7 +152,7 @@ with(this){return _c('h3',{attrs:{"id":"deleting-all-entries-delete-all"}},[_v("
 with(this){return _c('p',[_v("Format: "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("delete-all")])])}
 },function anonymous(
 ) {
-with(this){return _c('ul',[_c('li',[_v("'delete-all' followed by 'yes' Deletes all patients' information in the patientlist.json and displays an empty list.")]),_v(" "),_c('li',[_v("'delete-all' followed by 'no' Causes no changes to the patient list.")])])}
+with(this){return _c('ul',[_c('li',[_v("'delete-all' followed by 'yes' Deletes all patients' information in the patientlist.json and displays an empty list.")]),_v(" "),_c('li',[_v("'delete-all' followed by 'no' Causes no changes to the patient list.")]),_v(" "),_c('li',[_v("'delete-all' followed by any other commands other than 'yes' and 'no' returns an error message that prompts the user to give either 'yes' or 'no' instead after 'delete-all' command.")])])}
 },function anonymous(
 ) {
 with(this){return _c('h3',{attrs:{"id":"forcefully-deleting-all-entries-delete-all-f"}},[_v("Forcefully deleting all entries : "),_c('code',{pre:true,attrs:{"class":"hljs inline no-lang"}},[_v("delete-all-f")]),_c('a',{staticClass:"fa fa-anchor",attrs:{"href":"#forcefully-deleting-all-entries-delete-all-f","onclick":"event.stopPropagation()"}})])}
@@ -227,6 +227,6 @@ with(this){return _c('h3',{attrs:{"id":"glossary"}},[_v("Glossary"),_c('a',{stat
 with(this){return _c('ul',[_c('li',[_c('strong',[_v("CLI")]),_v(": A method of interacting with a computer where the user issues commands to the system by typing in lines of text.")]),_v(" "),_c('li',[_c('strong',[_v("GUI")]),_v(": A type of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation, instead of text-based interfaces, typed command labels or text navigation.")]),_v(" "),_c('li',[_c('strong',[_v("JSON (JavaScript Object Notation)")]),_v(": A lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 15 Apr 2024, 23:25:39 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 15 Apr 2024, 23:28:20 GMT+8]")])])])}
 }];
   
