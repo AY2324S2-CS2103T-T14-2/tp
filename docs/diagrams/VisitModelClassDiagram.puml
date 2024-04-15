@@ -1,0 +1,14 @@
+@startuml
+!include style.puml
+skinparam arrowThickness 1.1
+skinparam arrowColor MODEL_COLOR
+skinparam classBackgroundColor MODEL_COLOR
+
+Patient *--> "1" UniqueVisitList
+
+UniqueVisitList -down-> Visit
+
+Visit *--> Condition
+Visit *--> Severity
+Visit *--> DateOfVisit
+@enduml

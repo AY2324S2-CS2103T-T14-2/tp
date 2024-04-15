@@ -15,7 +15,7 @@
 
 - [Regular-Expressions.info](https://www.regular-expressions.info/tutorial.html) was our source for learning regex.
 
-_{ list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well }_
+- The format of User Guide and Developer Guide was inspired by [AddressBook Level-3](https://se-education.org/addressbook-level3/).
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -38,6 +38,7 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**
 
 **`Main`** (consisting of classes [`Main`](https://github.com/AY2324S2-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2324S2-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/MainApp.java)) is in charge of the app launch and shut down.
+
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
 * At shut down, it shuts down the other components and invokes cleanup methods where necessary.
 
@@ -114,8 +115,8 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `InputParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* When called upon to parse a user command, the `InputParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InputParser` returns back as a `Command` object.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteByIndexCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-T14-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -125,10 +126,10 @@ How the parsing works:
 
 The `Model` component,
 
-* stores the address book data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
+* stores the patient list data i.e., all `Patient` objects (which are contained in a `UniquePatientList` object).
 * stores the currently 'selected' `Patient` objects (e.g., results of a search query) as a separate _filtered_ list which is exposed to outsiders as an unmodifiable `ObservableList<Patient>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * stores a `UserPref` object that represents the user’s preferences. This is exposed to the outside as a `ReadOnlyUserPref` objects.
-* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components)
+* does not depend on any of the other three components (as the `Model` represents data entities of the domain, they should make sense on their own without depending on other components).
 
 ### Storage component
 
@@ -137,13 +138,13 @@ The `Model` component,
 <puml src="diagrams/StorageClassDiagram.puml" width="550" />
 
 The `Storage` component,
-* can save both address book data and user preference data in JSON format, and read them back into corresponding objects.
+* can save both patient list data and user preference data in JSON format, and read them back into corresponding objects.
 * inherits from both `PatientListStorage` and `UserPrefStorage`, which means it can be treated as either one (if only the functionality of only one is needed).
-* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`)
+* depends on some classes in the `Model` component (because the `Storage` component's job is to save/retrieve objects that belong to the `Model`).
 
 ### Common classes
 
-Classes used by multiple components are in the `seedu.addressbook.commons` package.
+Classes used by multiple components are in the `seedu.address.commons` package.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -169,7 +170,7 @@ The following activity diagram describes the operation of `FindCommandParser`:
 <puml src="diagrams/FindActivityDiagram.puml" alt="FindActivityDiagram" />
 
 Each valid prefix is checked, and if found, the value proceeding it in the argument string is saved in the form of a subclass 
-of `Predicate`. Otherwise, a `Predicate` that always returns true is used instead. When `FindCommand` is created, all of the 
+of `Predicate`. Otherwise, a `Predicate` that always returns true is used instead. When `FindCommand` is created, both of the 
 `Predicate` are passed into it, which will be chained into a singular `Predicate` such that the `Model` component can use to update 
 the `PatientList`.
 
@@ -192,6 +193,12 @@ the name `Bob`, the command would be `find-n Bob`. This was rejected as it only 
 to a less flexible feature.
 
 
+#### Planned enhancements
+
+In later iterations, we plan to add appointment and the 3 visit fields as optional conditions. The implementation will be identical to the above, as we can exploit the chaining of multiple `Predicate` objects in Java.
+
+More complex enhancements can be made using the `Flag` subclass of `Prefix`, which is integrated into `ArgumentMultimap` as a zero-argument `Prefix`. This allows us to reuse the same command word `find`, but implement a different set of behaviour that is triggered when one or more optional `Flag` is detected. For example,  the command `find-d n/Bob` could be implemented to find and delete all patients with the keyword `Bob` in their name.
+
 
 ### List in alphabetical order feature
 
@@ -203,13 +210,13 @@ The implementation of the `list` command works as follows.
 
 Upon the user's entering the `list` command, after checking that the list of patients is not empty, a list of all `Patients` is retrieved from the `Model` object and added to a separate `ArrayList`. From there, a `Comparator` is created that sorts the list of `Patients` using their `fullName`. Then, each element from the `ArrayList` is removed then added in the correct alphabetical order. Once this is completed, the `CommandResult` returns successfully and displays the correct output, a list of all patients in alphabetical order.
 
-The following sequence diagram shows the sequence of events when the 'list' command is typed by a user.
+The following sequence diagram shows the sequence of events when the `list` command is typed by a user.
 
 <puml src="diagrams/ListSequenceDiagram.puml" alt="ListSequenceDiagram" />
 
 #### Design considerations
 
-The current design was chosen as the existing list of `Patients` in the `Model` object, `getFilteredPersonList()`, is an immutable object that necessitated the creation of an `ArrayList` object, though it may be inefficient.
+The current design was chosen as the existing list of `Patients` in the `Model` object, `getFilteredPatientList()`, is an immutable object that necessitated the creation of an `ArrayList` object, though it may be inefficient.
 
 
 ### Delete All feature
@@ -217,13 +224,13 @@ The current design was chosen as the existing list of `Patients` in the `Model` 
 #### Implementation
 
 The feature of deleting all entries is implemented via two separate commands (DeleteAllCommand and ForceDeleteAllCommand).
-When the user enters 'delete-all' command, AddressBookParser parses the command into a DeleteAllCommand.
+When the user enters 'delete-all' command, InputParser parses the command into a DeleteAllCommand.
 The LogicManager executes the DeleteAllCommand. This would return a CommandResult with a confirmation message,
 which asks if the user wants to truly delete all entries. When prompted with the confirmation message, the user would 
 have the choice to enter 'delete-all-f' command or to cancel the 'delete-all' command.
-When the 'delete-all-f' command is entered, AddressBookParser would parse the command into a ForceDeleteAllCommand.
+When the 'delete-all-f' command is entered, InputParser would parse the command into a ForceDeleteAllCommand.
 The LogicManager would execute the ForceDeleteAllCommand. This would set the current model of the patient list to clear 
-out all existing entries by calling setAddressBook method with an empty AddressBook object used as its argument.
+out all existing entries by calling setPatientList method with an empty PatientList object used as its argument.
 A CommandResult object would be returned with a success message that states that all data has been successfully deleted.
 
 The following sequence diagram describes the sequence of logic when the user inputs 'delete-all-f' command:
@@ -237,103 +244,19 @@ user truly wants to delete all entries when the 'delete-all' command is given.
 If the user wishes to bypass the safety check and is certain of the intent to delete all entries, the user can enter 
 'delete-all-f' command to forcefully delete all entries.
 
+### Visit feature
 
-### \[Proposed\] Undo/redo feature
+#### Implementation
 
-#### Proposed Implementation
+<puml src="diagrams/VisitModelClassDiagram.puml" alt="VisitModelClassDiagram" />
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The `Visit` - `Patient` relationship in the `Logic` component is identical to that of `Patient` - `PatientList` relationship. In our implementation, the `Patient` class has the added responsibility of acting as a container for all `Visit` objects associated with it. This is achieved by the `UniqueVisitList` created upon construction of a `Patient` instance.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+#### Design Considerations
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+The current design is convenient as all methods relating to the `Visit` object will be going through the `Patient` object, which means the `Visit` does not need to hold a reference to the `Patient` it belongs to. Furthermore,  `Command` instances that uses `Visit` will not need a reference to it, ensuring immutability. 
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-<puml src="diagrams/UndoRedoState0.puml" alt="UndoRedoState0" />
-
-Step 2. The user executes `delete 5` command to delete the 5th patient in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-<puml src="diagrams/UndoRedoState1.puml" alt="UndoRedoState1" />
-
-Step 3. The user executes `add n/David …​` to add a new patient. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-<puml src="diagrams/UndoRedoState2.puml" alt="UndoRedoState2" />
-
-<box type="info" seamless>
-
-**Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-</box>
-
-Step 4. The user now decides that adding the patient was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-<puml src="diagrams/UndoRedoState3.puml" alt="UndoRedoState3" />
-
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
-
-</box>
-
-The following sequence diagram shows how an undo operation goes through the `Logic` component:
-
-<puml src="diagrams/UndoSequenceDiagram-Logic.puml" alt="UndoSequenceDiagram-Logic" />
-
-<box type="info" seamless>
-
-**Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</box>
-
-Similarly, how an undo operation goes through the `Model` component is shown below:
-
-<puml src="diagrams/UndoSequenceDiagram-Model.puml" alt="UndoSequenceDiagram-Model" />
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<box type="info" seamless>
-
-**Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</box>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-<puml src="diagrams/UndoRedoState4.puml" alt="UndoRedoState4" />
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-<puml src="diagrams/UndoRedoState5.puml" alt="UndoRedoState5" />
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<puml src="diagrams/CommitActivityDiagram.puml" width="250" />
-
-#### Design considerations:
-
-**Aspect: How undo & redo executes:**
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
-
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the patient being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
+The initial design was to have the 3 `Visit` fields be part of the `Patient` object to keep track of the latest instance of visit. This was primarily for ease of implementation, as fewer new classes would need to be created. However, this design fell apart as we needed to keep track of past patient visits as well.
 
 
 --------------------------------------------------------------------------------------------------------------------
@@ -373,13 +296,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | receptionist | see usage instructions           | refer to instructions when I forget how to use the App                   |
 | `* * *`  | receptionist | see the list of patients         | check the index of all patients                                          |
 | `* * *`  | receptionist | add a new patient                |                                                                          |
+| `* * *`  | receptionist | add a new visit                  | specify a patient and record their visit                                 |
 | `* * *`  | receptionist | delete a patient                 | remove entries that are outdated                                         |
+| `* * *`  | receptionist | delete a visit                   | remove details of a patient's latest visit                               |
 | `* * *`  | receptionist | find a patient by name           | locate details of a patient without having to go through the entire list |
 | `* *`    | receptionist | find a patient by contact number | look for a specific patient without worrying about duplicate names       |
 | `* *`    | receptionist | delete all patients              | easily reset the list to a blank state                                   |
 | `* *`    | receptionist | exit  with a command             | close the application with keyboard inputs only                          |
 
-*{More to be added}*
 
 ### Use cases
 
@@ -486,14 +410,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 5. Can only be used by a registered receptionist.
 6. Each command should take no more than 1 second until a response is displayed.
 
-*{More to be added}*
-
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, MacOS
 * **Patient**: A patient who has visited the clinic at least once due to an illness
-* **Receptionist** The user operating MediTrack
-* **Patient information**: Name, contact number, address, email, date of birth, symptoms, date of visit 
+* **Receptionist**: The user operating MediTrack
+* **Patient information**: Name, contact number, address, email, date of birth, sex, appointment
+* **Visit**: An instance of a particular patient coming to the clinic for a medical reason
+* **Visit information**: Condition, severity, date of visit
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -515,7 +439,7 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file <br> Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
 1. Saving window preferences
 
@@ -524,7 +448,21 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutting down
+
+    1. Test case: `exit`<br>
+    Expected: Confirmation message prompting a yes or no.
+    2. Test case: `yes` <br>
+    Expected: Window closes. 
+
+### Adding a patient
+
+1. Adding a patient when no patients exist
+    1. Prerequisites: Ensure that the list is empty by using the command `delete-all-f`.
+    1. Test case: `add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 b/25/2/2024 s/Male`<br>
+   Expected: Patient added to the list. Details of the patient shown in the status message. 
+   1. Incorrect add commands to try: the above, but with some arguments missing<br>
+   Expected: No patient added. Error details shown in status message.
 
 ### Deleting a patient
 
@@ -533,20 +471,13 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all patients using the `list` command. Multiple patients in the list.
 
    1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First patient is deleted from the list. Details of the deleted patient shown in the status message. 
 
    1. Test case: `delete 0`<br>
-      Expected: No patient is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No patient is deleted. Error details shown in the status message. 
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
 
-### Saving data
 
-1. Dealing with missing/corrupted data files
-
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
