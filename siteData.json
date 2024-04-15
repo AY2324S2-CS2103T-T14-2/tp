@@ -53,8 +53,7 @@
         "find-feature": "Find feature",
         "list-in-alphabetical-order-feature": "List in alphabetical order feature",
         "delete-all-feature": "Delete All feature",
-        "proposed-undo-redo-feature": "[Proposed] Undo/redo feature",
-        "proposed-data-archiving": "[Proposed] Data archiving",
+        "visit-feature": "Visit feature",
         "documentation-logging-testing-configuration-dev-ops": "Documentation, logging, testing, configuration, dev-ops",
         "appendix-requirements": "Appendix: Requirements",
         "product-scope": "Product scope",
@@ -64,8 +63,8 @@
         "glossary": "Glossary",
         "appendix-instructions-for-manual-testing": "Appendix: Instructions for manual testing",
         "launch-and-shutdown": "Launch and shutdown",
-        "deleting-a-patient": "Deleting a patient",
-        "saving-data": "Saving data"
+        "adding-a-patient": "Adding a patient",
+        "deleting-a-patient": "Deleting a patient"
       },
       "headingKeywords": {}
     },

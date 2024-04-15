@@ -29,6 +29,7 @@ HiddenOutside ..> Storage
 
 StorageManager .up.|> Storage
 StorageManager -up-> "1" UserPrefsStorage
+
 StorageManager -up-> "1" PatientListStorage
 
 Storage -left-|> UserPrefsStorage
@@ -36,6 +37,7 @@ Storage -right-|> PatientListStorage
 
 JsonUserPrefsStorage .up.|> UserPrefsStorage
 JsonPatientListStorage .up.|> PatientListStorage
+
 JsonPatientListStorage ..> JsonSerializablePatientList
 JsonSerializablePatientList --> "*" JsonAdaptedPatient
 JsonAdaptedPatient --> "*" JsonAdaptedVisit

@@ -3,20 +3,20 @@
 skinparam ArrowFontStyle plain
 
 Participant ":LogicManager" as logic LOGIC_COLOR
-Participant ":AddressBookParser" as abp LOGIC_COLOR
+Participant ":InputParser" as ip LOGIC_COLOR
 Participant ":EditCommandParser" as ecp LOGIC_COLOR
 Participant "command:EditCommand" as ec LOGIC_COLOR
 
 [-> logic : execute
 activate logic
-logic -> abp ++: parseCommand(commandText)
+logic -> ip ++: parseCommand(commandText)
 create ecp
-abp -> ecp
-abp -> ecp ++: parse(arguments)
+ip -> ecp
+ip -> ecp ++: parse(arguments)
 create ec
-ecp -> ec ++: index, editPersonDescriptor
+ecp -> ec ++: index, editPatientDescriptor
 ec --> ecp --
-ecp --> abp --: command
-abp --> logic --: command
+ecp --> ip --: command
+ip --> logic --: command
 
 @enduml
