@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -23,23 +24,24 @@ public class DeleteByNamePhoneNumberCommandParser implements Parser<DeleteByName
      * @throws ParseException Exception thrown if the user input does not conform the expected format.
      */
     public DeleteByNamePhoneNumberCommand parse(String args) throws ParseException {
-        try {
-            ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
+        requireNonNull(args);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
 
-            if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE) || !argMultimap.getPreamble().isEmpty()) {
-                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        DeleteByNamePhoneNumberCommand.MESSAGE_USAGE));
-            }
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE) || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteByNamePhoneNumberCommand.MESSAGE_USAGE));
+        } else if (argMultimap.getPreamble().isEmpty() && arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)) {
+            String nameArg = argMultimap.getValue(PREFIX_NAME).get();
+            String phoneArg = argMultimap.getValue(PREFIX_PHONE).get();
 
-            argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE);
-
-            Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-            Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+            Name name = ParserUtil.parseName(nameArg);
+            Phone phone = ParserUtil.parsePhone(phoneArg);
 
             return new DeleteByNamePhoneNumberCommand(name, phone);
-        } catch (ParseException pe) {
+        } else {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteByNamePhoneNumberCommand.MESSAGE_USAGE), pe);
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteByNamePhoneNumberCommand.MESSAGE_USAGE));
         }
     }
 

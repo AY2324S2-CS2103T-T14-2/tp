@@ -50,19 +50,20 @@ public class DeleteByNamePhoneNumberCommand extends Command {
      */
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        try {
+            requireNonNull(model);
 
-        Patient patientToBeDeleted = model.getPatient(name, phone);
+            Patient patientToBeDeleted = model.getPatient(name, phone);
 
-        logger.fine("checkpoint");
+            logger.fine("checkpoint");
 
-        if (patientToBeDeleted == null) {
-            throw new CommandException(String.format("There is no patient with name %s and phone number %s",
-                    name, phone));
+            model.deletePatient(patientToBeDeleted);
+
+            return new CommandResult(String.format(DELETE_PATIENT_SUCCESS_MESSAGE, patientToBeDeleted.getName()));
+        } catch (RuntimeException e) {
+            throw new CommandException("There is no patient with the specified name and phone number");
+        } catch (Exception e) {
+            throw new CommandException(e.getMessage());
         }
-
-        model.deletePatient(patientToBeDeleted);
-
-        return new CommandResult(String.format(DELETE_PATIENT_SUCCESS_MESSAGE, patientToBeDeleted.getName()));
     }
 }
