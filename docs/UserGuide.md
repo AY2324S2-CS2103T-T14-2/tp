@@ -64,7 +64,7 @@ The purpose of this User Guide is multifaceted. Primarily, it serves as an educa
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list` and `exit`) will be ignored.<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`.
 
-* For any parameters using date format, strictly need to follow "yyyy-MM-dd" and "dd/MM/yyyy".
+* For any parameters using date format, strictly need to follow "yyyy-MM-dd" and "dd/MM/yyyy". If the date exceeds the maximum date of that month, then will take the maximum date of that month.
 
 * Duplicate patients are not allowed (Patients are considered the same patients if they have the same name and phone number).
 
@@ -75,6 +75,8 @@ The purpose of this User Guide is multifaceted. Primarily, it serves as an educa
 * There is no restriction in Date of Birth and Appointment. Appointment can be before Date of Birth.
 
 * Sex field only accepts specific "Male" and "Female" as an input (eg. "MALE" or "FEMALE" is not accepted).
+
+* “Appointment” refers to a scheduled future date when a patient plans to visit the clinic. Conversely, “Visit” refers to a recorded instance of a patient’s past attendance at the clinic.
 
 * Severity field only accepts specific label as "Low" or "High" as an input (eg. "LOW" or "HIGH" is not accepted).
 
@@ -358,3 +360,8 @@ Furthermore, certain edits can cause the MediTrack to behave in unexpected ways 
 
 --------------------------------------------------------------------------------------------------------------------
 
+### Glossary
+
+* **CLI**: A method of interacting with a computer where the user issues commands to the system by typing in lines of text.
+* **GUI**: A type of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation, instead of text-based interfaces, typed command labels or text navigation.
+* **JSON (JavaScript Object Notation)**: A lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.
