@@ -225,8 +225,8 @@ Format: `find [n/KEYWORDS] [p/PHONE_NUMBER]`
 * Unlike keywords, only 1 phone number can be provided. e.g. `p/98765432 97538642` is invalid.
 
 Example:
-* `find n/John` returns `john` and `John Doe`.
-* `find n/John p/98765432` returns a patient with name `john` and phone number `98765432`.
+* `find n/John` Displays all patients with name containing `John`.
+* `find n/John p/98765432` Displays all patients with name containing `john` and phone number `98765432`.
 * `find n/alex roy` returns `Alex Yeoh`, `Roy Balakrishnan`. The output is shown below. <br>
   ![result for 'find n/alex roy'](images/findAlexRoyResult.png)
 
@@ -236,12 +236,10 @@ Deletes the patient at the specified index within the patient list.
 
 Format: `delete INDEX`
 
-* Deletes the patient at the specified `INDEX`.
-* The index refers to the index number shown in the displayed patient list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the patient at the specified `INDEX`. The index refers to the index number shown in the displayed patient list. The index **must be a positive integer** 1, 2, 3, …​
 
 Example:
-* `delete 1` returns “Successfully deleted patient NAME’s data” for the patient at index 1.
+* `delete 1` Deletes the first patient in the displayed list.
 
 ### Deleting a specific patient using name and phone number : `delete-p`
 
@@ -252,17 +250,17 @@ Format: `delete-p n/NAME p/PHONE_NUMBER`
 * Refer to the respective rules under the 'add' command for acceptable inputs to 'delete-p' command.
 
 Example: 
-* `delete n/Eugene Hirose p/90807561` returns “Successfully deleted patient Eugene Hirose’s data”.
+* `delete n/Eugene Hirose p/90807561` Deletes the patient with name exactly the same as "Eugene Hirose" and phone number exactly the same as "90807561".
 
 ### Deleting all entries : `delete-all`
 
-Lets the system know the user wants to delete all entries from the patient list.
+Deletes all patients' information in the patientlist.json.
 
 Format: `delete-all`
 
 Example:
-* 'delete-all' followed by 'yes' removes all entries and show an empty list of patients.
-* 'delete-all' followed by 'no' does not cause any changes to the patient list.
+* 'delete-all' followed by 'yes' Deletes all patients' information in the patientlist.json and displays an empty list.
+* 'delete-all' followed by 'no' Causes no changes to the patient list.
 
 ### Forcefully deleting all entries : `delete-all-f`
 
@@ -271,7 +269,7 @@ Forcefully deletes all entries from the patient list.
 Format: `delete-all-f`
 
 Example:
-* `delete-all-f` removes all entries and show an empty list of patients.
+* `delete-all-f` Deletes all patients' information in the patientlist.json and displays an empty list.
 
 ### Deleting the latest visit of a patient: `deletev`
 
