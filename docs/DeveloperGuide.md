@@ -114,7 +114,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 <puml src="diagrams/ParserClasses.puml" width="600"/>
 
 How the parsing works:
-* When called upon to parse a user command, the `InputParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
+* When called upon to parse a user command, the `InputParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `InputParser` returns back as a `Command` object.
 * All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
 
 ### Model component
@@ -209,7 +209,7 @@ The following sequence diagram shows the sequence of events when the 'list' comm
 
 #### Design considerations
 
-The current design was chosen as the existing list of `Patients` in the `Model` object, `getFilteredPersonList()`, is an immutable object that necessitated the creation of an `ArrayList` object, though it may be inefficient.
+The current design was chosen as the existing list of `Patients` in the `Model` object, `getFilteredPatientList()`, is an immutable object that necessitated the creation of an `ArrayList` object, though it may be inefficient.
 
 
 ### Delete All feature
@@ -217,13 +217,20 @@ The current design was chosen as the existing list of `Patients` in the `Model` 
 #### Implementation
 
 The feature of deleting all entries is implemented via two separate commands (DeleteAllCommand and ForceDeleteAllCommand).
-When the user enters 'delete-all' command, AddressBookParser parses the command into a DeleteAllCommand.
-The LogicManager executes the DeleteAllCommand. This would return a CommandResult with a confirmation message,
-which asks if the user wants to truly delete all entries. When prompted with the confirmation message, the user would 
-have the choice to enter 'delete-all-f' command or to cancel the 'delete-all' command.
-When the 'delete-all-f' command is entered, AddressBookParser would parse the command into a ForceDeleteAllCommand.
+When the user enters 'delete-all' command, InputParser updates its isPreviousCommandDeleteAll variable as true
+and parses the command into a DeleteAllCommand.
+The LogicManager then executes the DeleteAllCommand. This would return a CommandResult with a confirmation message,
+which asks if the user wants to truly delete all entries and prompts the user to give either a 'yes' or 'no' command. 
+If the user enters 'yes', the InputParser checks that the previous command was a DeleteAllCommand and parses the 'yes' 
+command into a YesCommand that is set to delete all entries when its execute method is called.
+The LogicManager executes the YesCommand to delete all entries.
+If the user enters 'no' instead of 'yes', this would parse the 'no' command into a NoCommand that does not make any
+changes to the entries.
+The LogicManager executes the NoCommand, leading to no effective change.
+
+When the 'delete-all-f' command is entered instead of 'delete-all', InputParser would parse the command into a ForceDeleteAllCommand.
 The LogicManager would execute the ForceDeleteAllCommand. This would set the current model of the patient list to clear 
-out all existing entries by calling setAddressBook method with an empty AddressBook object used as its argument.
+out all existing entries by calling setPatientList method with an empty PatientList object used as its argument.
 A CommandResult object would be returned with a success message that states that all data has been successfully deleted.
 
 The following sequence diagram describes the sequence of logic when the user inputs 'delete-all-f' command:
