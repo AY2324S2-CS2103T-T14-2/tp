@@ -15,7 +15,7 @@
 
 - [Regular-Expressions.info](https://www.regular-expressions.info/tutorial.html) was our source for learning regex.
 
-- The format of User Guide and Developer Guide was inspired by [AddressBook Level-3](https://se-education.org/addressbook-level3/).
+- The format of User Guide and Developer Guide was taken from [AddressBook Level-3](https://se-education.org/addressbook-level3/) with some modifications.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -123,6 +123,11 @@ How the parsing works:
 
 <puml src="diagrams/ModelClassDiagram.puml" width="450" />
 
+<box type="info" seamless>
+
+**Note:** The diagram omits details of `UniqueVisitList` as that will be shown in [**Visit feature**](#implementation-4).
+
+</box>
 
 The `Model` component,
 

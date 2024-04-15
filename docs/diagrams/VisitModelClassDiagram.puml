@@ -6,9 +6,9 @@ skinparam classBackgroundColor MODEL_COLOR
 
 Patient *--> "1" UniqueVisitList
 
-UniqueVisitList -down-> Visit
+UniqueVisitList -down->"*" Visit
 
-Visit *--> Condition
-Visit *--> Severity
-Visit *--> DateOfVisit
+Visit *--> "1"Condition
+Visit *--> "1"Severity
+Visit *--> "1"DateOfVisit
 @enduml
