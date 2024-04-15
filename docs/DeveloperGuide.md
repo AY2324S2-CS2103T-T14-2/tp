@@ -224,11 +224,18 @@ The current design was chosen as the existing list of `Patients` in the `Model` 
 #### Implementation
 
 The feature of deleting all entries is implemented via two separate commands (DeleteAllCommand and ForceDeleteAllCommand).
-When the user enters 'delete-all' command, InputParser parses the command into a DeleteAllCommand.
-The LogicManager executes the DeleteAllCommand. This would return a CommandResult with a confirmation message,
-which asks if the user wants to truly delete all entries. When prompted with the confirmation message, the user would 
-have the choice to enter 'delete-all-f' command or to cancel the 'delete-all' command.
-When the 'delete-all-f' command is entered, InputParser would parse the command into a ForceDeleteAllCommand.
+When the user enters 'delete-all' command, InputParser updates its isPreviousCommandDeleteAll variable as true
+and parses the command into a DeleteAllCommand.
+The LogicManager then executes the DeleteAllCommand. This would return a CommandResult with a confirmation message,
+which asks if the user wants to truly delete all entries and prompts the user to give either a 'yes' or 'no' command. 
+If the user enters 'yes', the InputParser checks that the previous command was a DeleteAllCommand and parses the 'yes' 
+command into a YesCommand that is set to delete all entries when its execute method is called.
+The LogicManager executes the YesCommand to delete all entries.
+If the user enters 'no' instead of 'yes', this would parse the 'no' command into a NoCommand that does not make any
+changes to the entries.
+The LogicManager executes the NoCommand, leading to no effective change.
+
+When the 'delete-all-f' command is entered instead of 'delete-all', InputParser would parse the command into a ForceDeleteAllCommand.
 The LogicManager would execute the ForceDeleteAllCommand. This would set the current model of the patient list to clear 
 out all existing entries by calling setPatientList method with an empty PatientList object used as its argument.
 A CommandResult object would be returned with a success message that states that all data has been successfully deleted.
