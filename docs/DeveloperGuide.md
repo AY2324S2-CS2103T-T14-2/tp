@@ -125,7 +125,7 @@ How the parsing works:
 
 <box type="info" seamless>
 
-**Note:** The diagram omits details of `UniqueVisitList` as that will be shown in [**Visit feature**](#implementation-4).
+**Note:** The diagram omits details of `UniqueVisitList` as that will be shown in [**Visit feature**](#visit-feature).
 
 </box>
 
