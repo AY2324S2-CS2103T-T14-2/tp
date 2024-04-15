@@ -73,33 +73,7 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPatientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
-        }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPatientDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
-            editPatientDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get()));
-        }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editPatientDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
-        }
-        if (argMultimap.getValue(PREFIX_DATEOFBIRTH).isPresent()) {
-            editPatientDescriptor.setDateOfBirth(ParserUtil.parseDateOfBirth(argMultimap
-                    .getValue(PREFIX_DATEOFBIRTH).get()));
-        }
-        if (argMultimap.getValue(PREFIX_SEX).isPresent()) {
-            editPatientDescriptor.setSex(ParserUtil.parseSex(argMultimap.getValue(PREFIX_SEX).get()));
-        }
-        if (argMultimap.getValue(PREFIX_APPOINTMENT).isPresent()) {
-            editPatientDescriptor.setAppointment(ParserUtil.parseAppointment(argMultimap
-                    .getValue(PREFIX_APPOINTMENT).get()));
-        }
-
-        if (!editPatientDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
-        }
+        setEditPatientDescriptor(editPatientDescriptor, argMultimap);
 
         return new EditCommand(new Name(namePrefix.trim()), new Phone(phonePrefix.trim()), editPatientDescriptor);
     }
@@ -122,6 +96,13 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPatientDescriptor editPatientDescriptor = new EditPatientDescriptor();
 
+        setEditPatientDescriptor(editPatientDescriptor, argMultimap);
+
+        return new EditCommand(index, editPatientDescriptor);
+    }
+
+    private static void setEditPatientDescriptor(EditPatientDescriptor editPatientDescriptor,
+                                                 ArgumentMultimap argMultimap) throws ParseException {
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             editPatientDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
@@ -149,8 +130,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (!editPatientDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
-
-        return new EditCommand(index, editPatientDescriptor);
     }
 
     /**
