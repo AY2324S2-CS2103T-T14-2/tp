@@ -227,6 +227,6 @@ with(this){return _c('h3',{attrs:{"id":"glossary"}},[_v("Glossary"),_c('a',{stat
 with(this){return _c('ul',[_c('li',[_c('strong',[_v("CLI")]),_v(": A method of interacting with a computer where the user issues commands to the system by typing in lines of text.")]),_v(" "),_c('li',[_c('strong',[_v("GUI")]),_v(": A type of user interface that allows users to interact with electronic devices through graphical icons and visual indicators such as secondary notation, instead of text-based interfaces, typed command labels or text navigation.")]),_v(" "),_c('li',[_c('strong',[_v("JSON (JavaScript Object Notation)")]),_v(": A lightweight data-interchange format that is easy for humans to read and write and easy for machines to parse and generate.")])])}
 },function anonymous(
 ) {
-with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 15 Apr 2024, 23:15:27 GMT+8]")])])])}
+with(this){return _c('footer',[_c('div',{staticClass:"text-center"},[_c('small',[_v("["),_c('span',[_c('strong',[_v("Powered by")])]),_v(" "),_c('img',{attrs:{"src":"https://markbind.org/favicon.ico","width":"30"}}),_v(" "),_c('a',{attrs:{"href":"https://markbind.org/"}},[_v("MarkBind 5.4.0")]),_v(", generated on Mon, 15 Apr 2024, 23:25:39 GMT+8]")])])])}
 }];
   
